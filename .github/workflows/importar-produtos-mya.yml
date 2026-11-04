@@ -1,0 +1,34 @@
+name: Atualizar catálogo de encomendas (Mya)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar dependências
+        run: pip install -r scripts/requirements.txt
+      - name: Importar produtos
+        run: python scripts/importar_mya.py
+      - name: Salvar catálogo atualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add produtos.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualizar catálogo de encomendas da Mya"
+            git push
+          else
+            echo "Sem mudanças no catálogo."
+          fi
