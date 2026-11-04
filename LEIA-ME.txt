@@ -1,48 +1,69 @@
-MYRANDA PRATAS — CATÁLOGO DE ENCOMENDAS
-=======================================
+MYRANDA PRATAS — CATÁLOGO DE ENCOMENDAS | ATUALIZAÇÃO COM IMPORTADOR MYA
+=======================================================================
 
-O QUE É
-Uma primeira versão funcional, personalizada, do catálogo de encomendas da Myranda.
-Busca por nome/código, filtros por categorias, seleção de joias e envio da seleção
-pelo WhatsApp. Não mostra preços nem permite pagamento pelo site.
+O QUE FOI ALTERADO
+- Mantido o visual aprovado da Myranda (creme + vinho).
+- Mantido o pedido pelo WhatsApp 61 99597-0024, sem mostrar preços.
+- Adicionado botão "Ver mais joias" para não carregar milhares de peças de uma vez.
+- Adicionado importador que tenta ler todas as páginas públicas do catálogo
+  da Mya Prata e preencher produtos.json com código, nome, categoria e foto.
+- Nenhum arquivo do site principal da Myranda é alterado.
 
-ATENÇÃO SOBRE O CONTEÚDO
-- Esta versão contém 12 modelos de exemplo com imagens vinculadas ao servidor de fotos
-  da Mya, obtidos de páginas públicas da fornecedora.
-- NÃO reproduz ainda as 67 páginas / todo o estoque da Mya.
-- O acesso às imagens depende da disponibilidade e das regras do servidor de imagens
-  da fornecedora. Se uma imagem falhar, aparece uma imagem de reserva.
-- As imagens são usadas considerando a autorização informada pela titular da loja;
-  confirme as condições de reutilização e, se possível, receba os arquivos originais.
-- O logo nesta versão é provisório (marca desenhada em vetor + tipografia).
+IMPORTANTE
+O arquivo produtos.json que acompanha este ZIP AINDA É O MODELO COM 12 PEÇAS.
+O catálogo completo só aparece quando o importador rodar com sucesso no GitHub.
+O ambiente em que este pacote foi feito não conseguiu baixar diretamente o site
+original para testar a extração real; o script foi testado com páginas de exemplo.
+Se o fornecedor mudar o HTML, bloquear a requisição ou mudar as fotos, o
+importador mostrará erro e preservará o catálogo anterior. Não declare o
+catálogo completo antes de confirmar o resultado da execução.
 
-COMO TESTAR NO COMPUTADOR
-1. Descompacte o ZIP.
-2. Abra a pasta em um editor (por exemplo, VS Code).
-3. Para ver a versão demonstrativa, você pode abrir index.html diretamente.
-   Para carregar atualizações de produtos.json e para publicar, use um servidor local.
-   Exemplo com Python: python -m http.server 8000
-   Depois abra: http://localhost:8000
+PASSO 1 — ATUALIZAR O REPOSITÓRIO
+1. Baixe o ZIP e clique com botão direito > Extrair tudo.
+2. Entre no repositório GitHub que você já criou: Myranda-Encomendas.
+3. Clique em Add file > Upload files.
+4. Arraste PARA A PÁGINA de upload o conteúdo EXTRAÍDO, incluindo as pastas:
+     index.html
+     produtos.json
+     produtos_modelo.csv
+     LEIA-ME.txt
+     scripts/
+     .github/
+   Preserve a estrutura das pastas. Não envie o ZIP diretamente.
+5. Clique em Commit changes (branch main).
 
-COMO PUBLICAR
-Faça upload dos arquivos index.html e produtos.json em uma hospedagem de site
-estático (Vercel, Netlify ou similar). O endereço definitivo depende da hospedagem.
-Este pacote NÃO foi publicado automaticamente.
+PASSO 2 — IMPORTAR OS PRODUTOS DO FORNECEDOR
+1. No GitHub, abra a aba Actions.
+2. Encontre "Atualizar catálogo de encomendas (Mya)".
+3. Clique em Run workflow > main > Run workflow.
+4. Aguarde a execução terminar. Uma marca VERDE significa sucesso.
+5. O importador faz um commit automático de produtos.json atualizado.
+6. A Vercel normalmente publica a alteração sozinha. Reabra o catálogo e
+   atualize a página com Ctrl+F5 após alguns minutos.
 
-COMO COLOCAR MAIS PEÇAS
-Atualize o arquivo 'produtos.json', mantendo os campos:
-  sku, nome, categoria, imagem, descricao, destaque
-A imagem deve ser um link HTTPS direto para a foto ou um caminho local hospedado.
-Não há campo de preço: ele não pode ser mostrado ao visitante por acidente.
+SE DER ERRO
+Abra a execução vermelha em Actions > importar > etapa que falhou,
+e envie um print do erro. Não precisa alterar nada do site principal.
+O script verifica se foram obtidos pelo menos 100 produtos com 70% das fotos;
+se a verificação falhar, NÃO sobrescreve produtos.json.
 
-Importação no próprio navegador: no rodapé, toque em 'Importar catálogo (uso interno)'
-e envie JSON ou CSV. Observação: essa importação altera APENAS seu navegador.
-Para deixar disponível a todos os clientes, substitua produtos.json na hospedagem.
+O QUE NÃO É ATUALIZADO
+- Preços (nunca são importados nem exibidos).
+- Estoque real e disponibilidade: a cliente solicita e você confirma.
+- Pedidos, pagamentos ou banco de dados do site principal.
+- Fotos em servidor próprio: são links para fotos públicas do fornecedor.
 
-TELEFONE USADO PARA ENCOMENDAS
-WhatsApp: (61) 99597-0024. Atualize a constante WA no código, se mudar.
+USO DAS IMAGENS
+Os arquivos presumem autorização de uso comercial dada pela fornecedora,
+conforme informado pela titular da Myranda. Se a autorização for revogada
+ou houver restrições, interrompa a importação e substitua as imagens.
 
-PRÓXIMO PASSO PARA COPIAR O CATÁLOGO INTEIRO
-Solicitar à Mya uma exportação de catálogo (planilha com código, título, categoria,
-fotos/URLs) e/ou um pacote de imagens. Com esses dados é possível popular todos os
-modelos sem inventar produtos, imagens ou disponibilidade.
+CATEGORIAS
+Anéis, Pulseiras, Colares, Brincos, Argolas, Trios, Escapulários,
+Tornozeleiras, Berloques, Pingentes, Conjuntos e Outros.
+
+PARA CORRIGIR A PARTE VISUAL
+Edite index.html. Para produtos, edite produtos.json diretamente ou execute
+novamente a importação pelo Actions. O script está em scripts/importar_mya.py.
+
+URL DO CATÁLOGO ATUAL: https://myranda-encomendas.vercel.app
