@@ -25,6 +25,14 @@
 .category-context{font-size:12px;color:#907d82;margin:8px 0 0}
 .category-list .chip:focus-visible{outline:3px solid #bb8395;outline-offset:2px}
 @media(max-width:660px){.category-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.category-list .chip{font-size:12px;padding:13px 11px;gap:7px}.category-list .chip-count{font-size:10px;padding:4px 6px}.category-heading{font-size:22px}}
+
+/* Fichas de produto: foto, título e botão abrem a página individual. */
+.prod-img-link{display:block;cursor:zoom-in}.prod-img-link:focus-visible{outline:3px solid #b77e90;outline-offset:-3px}
+.zoom-indicator{position:absolute;bottom:12px;right:12px;border-radius:100px;padding:7px 11px;background:#fffef4e8;color:var(--wine);font-size:11px;font-weight:650;opacity:0;transition:opacity .2s}
+.prod-img-link:hover .zoom-indicator,.prod-img-link:focus-visible .zoom-indicator{opacity:1}
+.prod-name a:hover{color:var(--wine2);text-decoration:underline;text-underline-offset:4px}
+.view{display:flex;justify-content:center;align-items:center;text-align:center}
+@media(max-width:660px){.view{display:flex;font-size:11px}.zoom-indicator{display:none}.prod-actions{grid-template-columns:1fr}}
 </style></head>
 <body>
 <div class="topbar">PRATA 925 · CATÁLOGO DE ENCOMENDAS · MYRANDA PRATAS</div>
@@ -45,64 +53,92 @@ window.DEFAULT_PRODUCTS=[{"sku":"AN1407","nome":"Anel Meia Aliança — Três Zi
 const WA='5561995970024';
 const FALLBACK='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="680" viewBox="0 0 600 680"><rect width="600" height="680" fill="#f6f1ec"/><circle cx="300" cy="312" r="75" fill="none" stroke="#bca5ae" stroke-width="4"/><path d="M300 220c-40-40-88 14-50 52l50 45 50-45c38-38-10-92-50-52Z" fill="none" stroke="#ba9aa5" stroke-width="4"/><text x="300" y="450" text-anchor="middle" fill="#906b7b" font-family="Georgia" font-size="24">MYRANDA PRATAS</text><text x="300" y="478" text-anchor="middle" fill="#aa8b96" font-size="14" font-family="Arial">IMAGEM EM ATUALIZAÇÃO</text></svg>');
 function broken(i){i.onerror=null;i.src=FALLBACK}
-const $=id=>document.getElementById(id);let products=[],category='Todos',selected=[],shown=24;
+const $=id=>document.getElementById(id);const SELECTION_KEY='myranda-encomendas-selecao-v1';let memorySelection=[];
+function readSelection(){try{let a=JSON.parse(localStorage.getItem(SELECTION_KEY)||'[]');return Array.isArray(a)?a.filter(x=>x&&x.sku&&x.nome):[]}catch{return memorySelection.slice()}}
+function saveSelection(){memorySelection=selected.slice();try{localStorage.setItem(SELECTION_KEY,JSON.stringify(selected))}catch{}}
+let products=[],category='Todos',selected=readSelection(),shown=24;
+
 const html=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const CATEGORY_ORDER=['Todos','Brincos','Argolas','Anéis','Colares','Pulseiras','Trios','Conjuntos','Escapulários','Tornozeleiras','Pingentes','Berloques','Correntes','Piercings','Outros'];
+const CATEGORY_ORDER=['Todos','Favoritos','Brincos','Argolas','Anéis','Colares','Pulseiras','Pingentes','Berloques','Masculino','Trios','Conjuntos','Escapulários','Correntes','Tornozeleiras','Piercings','Terços','Duplas','Outros'];
 function fold(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
 function categoryOf(p){
-  const n=fold(p.nome||p.name), r=fold(p.categoria), sku=String(p.sku||p.codigo||'').toUpperCase();
-  if (/^(trio|kit de? (?:brincos|argolas)|kit trio)\b/.test(n)) return 'Trios';
-  if (/^(argola|argolinha|click)\b/.test(n)||/^brinco (?:de )?argola\b/.test(n)) return 'Argolas';
-  if (/^(piercing|ear ?cuff|earcuff)\b/.test(n)) return 'Piercings';
-  if (/^(brinco|brincos)\b/.test(n)) return 'Brincos';
-  if (/^(anel|aneis|alianca)\b/.test(n)) return 'Anéis';
-  if (/^(pulseira|bracelete)\b/.test(n)) return 'Pulseiras';
-  if (/^(colar|gargantilha|choker)\b/.test(n)) return 'Colares';
-  if (/^corrente\b/.test(n)) return 'Correntes';
-  if (/^escapulario\b/.test(n)) return 'Escapulários';
-  if (/^tornozeleira\b/.test(n)) return 'Tornozeleiras';
-  if (/^(pingente|medalha avulsa)\b/.test(n)) return 'Pingentes';
-  if (/^berloque\b/.test(n)) return 'Berloques';
-  if (/^(conjunto|kit)\b/.test(n)) return 'Conjuntos';
-  const aliases={'brincos':'Brincos','argolas':'Argolas','aneis':'Anéis','colares':'Colares','pulseiras':'Pulseiras','trios':'Trios','conjuntos':'Conjuntos','escapularios':'Escapulários','tornozeleiras':'Tornozeleiras','pingentes':'Pingentes','berloques':'Berloques','correntes':'Correntes','piercings':'Piercings'};
-  if (aliases[r]) return aliases[r];
-  if (sku.startsWith('AN')) return 'Anéis';
-  if (sku.startsWith('PU')) return 'Pulseiras';
-  if (sku.startsWith('CO')) return 'Colares';
-  if (sku.startsWith('ES')) return 'Escapulários';
-  if (sku.startsWith('TR')) return 'Trios';
-  if (sku.startsWith('BR')) return 'Brincos';
+  const n=fold(p.nome||p.name),r=fold(p.categoria),sku=String(p.sku||p.codigo||'').toUpperCase();
+  // A peça principal determina a categoria. Um colar com pingente continua na aba Colares.
+  if (/^(trio|kit de? (?:brincos|argolas)|kit trio)\b/.test(n))return 'Trios';
+  if (/^(berloque|berloques|charm|separador (?:para )?(?:pulseira|berloque))\b/.test(n))return 'Berloques';
+  if (/^(pingente|pingentes|medalha avulsa|medalha para colar|placa para colar)\b/.test(n))return 'Pingentes';
+  if (/^(argola|argolinha|click)\b/.test(n)||/^brinco (?:de )?argola\b/.test(n))return 'Argolas';
+  if (/^(piercing|ear ?cuff|earcuff)\b/.test(n))return 'Piercings';
+  if (/^(brinco|brincos)\b/.test(n))return 'Brincos';
+  if (/^(anel|aneis|alianca)\b/.test(n))return 'Anéis';
+  if (/^(pulseira|bracelete)\b/.test(n))return 'Pulseiras';
+  if (/^(colar|gargantilha|choker)\b/.test(n))return 'Colares';
+  if (/^corrente\b/.test(n))return 'Correntes';
+  if (/^escapulario\b/.test(n))return 'Escapulários';
+  if (/^tornozeleira\b/.test(n))return 'Tornozeleiras';
+  if (/^terco\b/.test(n))return 'Terços';
+  if (/^(dupla|duplo brinco)\b/.test(n))return 'Duplas';
+  if (/^(conjunto|kit)\b/.test(n))return 'Conjuntos';
+  const aliases={'brincos':'Brincos','argolas':'Argolas','aneis':'Anéis','colares':'Colares','pulseiras':'Pulseiras','trios':'Trios','conjuntos':'Conjuntos','escapularios':'Escapulários','tornozeleiras':'Tornozeleiras','pingentes':'Pingentes','berloques':'Berloques','correntes':'Correntes','piercings':'Piercings','tercos':'Terços','duplas':'Duplas'};
+  if(aliases[r])return aliases[r];
+  if(sku.startsWith('AN'))return 'Anéis';
+  if(sku.startsWith('PU'))return 'Pulseiras';
+  if(sku.startsWith('CO'))return 'Colares';
+  if(sku.startsWith('ES'))return 'Escapulários';
+  if(sku.startsWith('TR'))return 'Trios';
+  if(sku.startsWith('BR'))return 'Brincos';
   return 'Outros';
 }
-function normalize(p){return {sku:String(p.sku||p.codigo||'').trim(),nome:String(p.nome||p.name||'').trim(),categoria:categoryOf(p),imagem:String(p.imagem||p.image||'').trim(),descricao:String(p.descricao||p.description||'').trim(),destaque:p.destaque===true||p.destaque==='true'}}
-const load=async()=>{try{const response=await fetch('produtos.json',{cache:'no-store'});if(!response.ok)throw Error('Catálogo indisponível');products=await response.json()}catch(e){products=window.DEFAULT_PRODUCTS||[]}products=products.map(normalize).filter(p=>p.nome);if(category!=='Todos'&&!products.some(p=>p.categoria===category))category='Todos';render()};
-function filterList(){let q=fold($('search').value);return products.filter(p=>(category==='Todos'||p.categoria===category)&&(!q||fold(p.nome+' '+p.sku+' '+p.categoria).includes(q)))}
+function isMasculino(p){
+  const campos=[p.nome,p.categoriaOriginal,p.publico,p.genero,p.secao,...p.tags].map(fold).join(' ');
+  if(/\b(masculino|masculina|masculinos|masculinas)\b/.test(campos))return true;
+  // Estilos sugeridos para a vitrine masculina, sem retirar a peça da categoria principal.
+  const n=fold(p.nome);
+  if(/^(?:pulseira|bracelete)\b/.test(n)&&/\b(?:grumet|figaro|elo portugues|elos grossos|malha grossa)\b/.test(n)&&/\b(?:20|21|22|23|24)(?:\+\d+)?\s*cm\b/.test(n))return true;
+  if(/^(?:corrente|cordao)\b/.test(n)&&/\b(?:55|60|65|70|75|80)\s*cm\b/.test(n)&&/\b(?:grumet|figaro|cartier|elo portugues|veneziana|cordao)\b/.test(n))return true;
+  return false;
+}
+function normalize(p){
+  const rawImages=Array.isArray(p.imagens)?p.imagens:Array.isArray(p.fotos)?p.fotos:[];
+  const pics=rawImages.map(x=>typeof x==='string'?x:(x?.url||x?.src||'')).filter(x=>/^https:\/\//i.test(x));
+  const primary=String(p.imagem||p.image||pics[0]||'').trim();
+  if(primary&&!pics.includes(primary))pics.unshift(primary);
+  const o={sku:String(p.sku||p.codigo||'').trim(),nome:String(p.nome||p.name||'').trim(),categoriaOriginal:String(p.categoria||''),imagem:primary,imagens:pics,descricao:String(p.descricao||p.description||'').trim(),destaque:p.destaque===true||p.destaque==='true',publico:String(p.publico||''),genero:String(p.genero||''),secao:String(p.secao||''),tags:Array.isArray(p.tags)?p.tags:[]};
+  o.categoria=categoryOf(p);o.masculino=isMasculino(o);return o;
+}
+const load=async()=>{try{const response=await fetch('produtos.json',{cache:'no-store'});if(!response.ok)throw Error('Catálogo indisponível');products=await response.json()}catch(e){products=window.DEFAULT_PRODUCTS||[]}products=products.map(normalize).filter(p=>p.nome);if(category!=='Todos'&&category!=='Masculino'&&category!=='Favoritos'&&!products.some(p=>p.categoria===category))category='Todos';restoreListState();refreshDrawer();render()};
+function favoriteSkus(){try{const xs=JSON.parse(localStorage.getItem('myranda-encomendas-favoritos-v1')||'[]');return new Set(Array.isArray(xs)?xs:[])}catch{return new Set()}}
+function filterList(){let q=fold($('search').value),favorites=category==='Favoritos'?favoriteSkus():null;return products.filter(p=>(category==='Todos'||(category==='Masculino'?p.masculino:category==='Favoritos'?favorites.has(p.sku):p.categoria===category))&&(!q||fold(p.nome+' '+p.sku+' '+p.categoria).includes(q)))}
+function rememberListState(){try{sessionStorage.setItem('myranda-encomendas-lista',JSON.stringify({category,search:$('search').value,shown}))}catch{}}
+function restoreListState(){try{const s=JSON.parse(sessionStorage.getItem('myranda-encomendas-lista')||'null');if(s&&location.hash==='#colecao'){category=s.category||'Todos';shown=s.shown||24;$('search').value=s.search||''}}catch{}}
+function productUrl(sku){return 'produto.html?sku='+encodeURIComponent(sku)}
+
 function render(){
   const counts=products.reduce((acc,p)=>{acc[p.categoria]=(acc[p.categoria]||0)+1;return acc},{});
-  counts.Todos=products.length;
-  const cats=CATEGORY_ORDER.filter(c=>counts[c]>0);
+  counts.Todos=products.length;counts.Favoritos=products.filter(p=>favoriteSkus().has(p.sku)).length;counts.Masculino=products.filter(p=>p.masculino).length;counts.Pingentes=counts.Pingentes||0;counts.Berloques=counts.Berloques||0;
+  const cats=CATEGORY_ORDER.filter(c=>counts[c]>0||['Pingentes','Berloques','Masculino','Favoritos'].includes(c));
   $('categories').innerHTML=cats.map(c=>`<button type="button" role="tab" aria-selected="${c===category}" class="chip ${c===category?'active':''}" data-category="${html(c)}"><span>${html(c)}</span><span class="chip-count">${counts[c].toLocaleString('pt-BR')}</span></button>`).join('');
   document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;shown=24;render();$('category-heading').scrollIntoView({behavior:'smooth',block:'center'})}));
   $('category-heading').textContent=category==='Todos'?'Todos os modelos':category;
-  $('category-context').textContent=category==='Todos'?'Explore todas as categorias ou escolha uma aba acima.':'Exibindo apenas '+category.toLowerCase()+'. Para ver outras joias, escolha outra aba.';
+  $('category-context').textContent=category==='Todos'?'Explore todas as categorias ou escolha uma aba acima.':category==='Favoritos'?'As joias salvas nos seus favoritos aparecem aqui neste navegador.':category==='Masculino'?'Seleção de peças masculinas identificadas no catálogo. Algumas opções unissex podem estar em outras categorias.':'Exibindo apenas '+category.toLowerCase()+'. Para ver outras joias, escolha outra aba.';
   const arr=filterList();
   const visible=arr.slice(0,shown);
   $('item-count').textContent=arr.length?`${Math.min(shown,arr.length)} de ${arr.length} ${arr.length===1?'modelo':'modelos'}`:'Nenhum modelo encontrado';
-  $('products').innerHTML=arr.length?visible.map(p=>`<article class="product"><div class="prod-img"><img src="${html(p.imagem||FALLBACK)}" onerror="broken(this)" loading="lazy" alt="${html(p.nome)}"/><span class="chip-label">PRATA 925</span></div><div class="prod-info"><p class="sku">CÓD. ${html(p.sku)}</p><h3 class="prod-name">${html(p.nome)}</h3><p class="prod-desc">${html(p.descricao)}</p><div class="prod-actions"><button class="add" data-add="${html(p.sku)}">♡ Quero encomendar</button><button class="view" data-view="${html(p.sku)}">Ver detalhes</button></div></div></article>`).join(''):'<div class="empty">Nenhuma peça encontrada nessa busca.</div>';
+  $('products').innerHTML=arr.length?visible.map(p=>`<article class="product"><a class="prod-img prod-img-link" href="${html(productUrl(p.sku))}" data-detail-link aria-label="Ver detalhes de ${html(p.nome)}"><img src="${html(p.imagem||FALLBACK)}" onerror="broken(this)" loading="lazy" alt="${html(p.nome)}"/><span class="chip-label">PRATA 925</span><span class="zoom-indicator">⌕ Ver a joia</span></a><div class="prod-info"><p class="sku">CÓD. ${html(p.sku)}</p><h3 class="prod-name"><a href="${html(productUrl(p.sku))}" data-detail-link>${html(p.nome)}</a></h3><p class="prod-desc">${html(p.descricao)}</p><div class="prod-actions"><button class="add" data-add="${html(p.sku)}">♡ Quero encomendar</button><a class="view" href="${html(productUrl(p.sku))}" data-detail-link>Ver detalhes ↗</a></div></div></article>`).join(''):'<div class="empty">Nenhuma peça encontrada nessa categoria. Experimente a aba Todos ou outra busca.</div>';
   const more=$('more-products');
   more.style.display=arr.length>shown?'inline-block':'none';
   more.textContent=`Ver mais joias (${Math.min(24,arr.length-shown)} próximas)`;
   document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>addProduct(b.dataset.add)));
-  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>detail(b.dataset.view)));
+  document.querySelectorAll('[data-detail-link]').forEach(a=>a.addEventListener('click',rememberListState));
 }
 $('more-products').addEventListener('click',()=>{shown+=24;render()});
-function addProduct(sku){const p=products.find(x=>x.sku===sku);if(!p)return;selected.push({sku:p.sku,nome:p.nome,imagem:p.imagem});refreshDrawer();openDrawer()}
-function refreshDrawer(){$('count-bag').textContent=selected.length;$('drawer-items').innerHTML=selected.length?selected.map((p,i)=>`<div class="chosen"><img alt="${html(p.nome)}" src="${html(p.imagem||FALLBACK)}" onerror="broken(this)"/><div><strong>${html(p.nome)}</strong><div class="minis">Código: ${html(p.sku)}</div><button class="remove" data-remove="${i}">Remover da seleção</button></div></div>`).join(''):'<p style="color:#8e7880;line-height:1.8">Sua seleção está vazia. Adicione as joias que deseja consultar.</p>';document.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{selected.splice(Number(b.dataset.remove),1);refreshDrawer()}));$('send-btn').disabled=!selected.length;$('send-btn').style.opacity=selected.length?'1':'.5'}
+function addProduct(sku){const p=products.find(x=>x.sku===sku);if(!p)return;selected.push({sku:p.sku,nome:p.nome,imagem:p.imagem});saveSelection();refreshDrawer();openDrawer()}
+function refreshDrawer(){$('count-bag').textContent=selected.length;$('drawer-items').innerHTML=selected.length?selected.map((p,i)=>`<div class="chosen"><img alt="${html(p.nome)}" src="${html(p.imagem||FALLBACK)}" onerror="broken(this)"/><div><strong>${html(p.nome)}</strong><div class="minis">Código: ${html(p.sku)}</div><button class="remove" data-remove="${i}">Remover da seleção</button></div></div>`).join(''):'<p style="color:#8e7880;line-height:1.8">Sua seleção está vazia. Adicione as joias que deseja consultar.</p>';document.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{selected.splice(Number(b.dataset.remove),1);saveSelection();refreshDrawer()}));$('send-btn').disabled=!selected.length;$('send-btn').style.opacity=selected.length?'1':'.5'}
 function openDrawer(){$('shade').classList.add('open');$('drawer').classList.add('open');$('modal').classList.remove('open');document.body.style.overflow='hidden'}
 function closeAll(){$('shade').classList.remove('open');$('drawer').classList.remove('open');$('modal').classList.remove('open');document.body.style.overflow=''}
-function detail(sku){const p=products.find(x=>x.sku===sku);if(!p)return;$('modal-img').src=p.imagem||FALLBACK;$('modal-img').onerror=function(){broken(this)};$('modal-sku').textContent='CÓD. '+p.sku;$('modal-title').textContent=p.nome;$('modal-desc').textContent=p.descricao;$('modal-add').onclick=()=>addProduct(p.sku);$('shade').classList.add('open');$('modal').classList.add('open');$('drawer').classList.remove('open');document.body.style.overflow='hidden'}
+function detail(sku){rememberListState();window.location.href=productUrl(sku)}
 function sendWhatsApp(){if(!selected.length)return;const items=selected.map((p,i)=>`${i+1}. ${p.nome} (cód. ${p.sku})`).join('\n');const msg=`Olá! Vi o catálogo de encomendas da Myranda Pratas e gostaria de consultar disponibilidade, preços e prazos destas peças:\n\n${items}\n\nPodem me ajudar?`;window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank','noopener')}
-$('search').addEventListener('input',()=>{shown=24;render()});$('admin-open').addEventListener('click',()=>{$('admin-tools').classList.toggle('visible')});$('reset-products').addEventListener('click',()=>{load()});$('import-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const str=await f.text();let rows;if(f.name.endsWith('.json')){rows=JSON.parse(str)}else{const lines=str.replace(/\r/g,'').split('\n').filter(x=>x.trim());const split=(s)=>{let out=[],part='',quote=false;for(let i=0;i<s.length;i++){const c=s[i];if(c==='"'&&s[i+1]==='"'&&quote){part+='"';i++}else if(c==='"'){quote=!quote}else if(c===','&&!quote){out.push(part);part=''}else part+=c}out.push(part);return out};const headers=split(lines.shift());rows=lines.map(l=>Object.fromEntries(split(l).map((v,i)=>[headers[i],v])))}if(!Array.isArray(rows))throw Error('Formato de catálogo inválido');products=rows.map(normalize).filter(p=>p.nome);// Importação de teste somente neste navegador até atualizar o GitHub.
+$('search').addEventListener('input',()=>{shown=24;render()});window.addEventListener('pageshow',()=>{selected=readSelection();refreshDrawer();if(products.length)render()});$('admin-open').addEventListener('click',()=>{$('admin-tools').classList.toggle('visible')});$('reset-products').addEventListener('click',()=>{load()});$('import-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const str=await f.text();let rows;if(f.name.endsWith('.json')){rows=JSON.parse(str)}else{const lines=str.replace(/\r/g,'').split('\n').filter(x=>x.trim());const split=(s)=>{let out=[],part='',quote=false;for(let i=0;i<s.length;i++){const c=s[i];if(c==='"'&&s[i+1]==='"'&&quote){part+='"';i++}else if(c==='"'){quote=!quote}else if(c===','&&!quote){out.push(part);part=''}else part+=c}out.push(part);return out};const headers=split(lines.shift());rows=lines.map(l=>Object.fromEntries(split(l).map((v,i)=>[headers[i],v])))}if(!Array.isArray(rows))throw Error('Formato de catálogo inválido');products=rows.map(normalize).filter(p=>p.nome);// Importação de teste somente neste navegador até atualizar o GitHub.
 category='Todos';shown=24;$('search').value='';render();alert(`${products.length} modelos importados neste navegador. Para publicar para todos, envie o arquivo à hospedagem.`)}catch(ex){alert('Não consegui importar: '+ex.message)}});
 window.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});refreshDrawer();load();
 </script>
