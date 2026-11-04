@@ -81,33 +81,71 @@
       .hero-copy{max-width:320px!important;}
     }
   </style>
-  <!-- Ajuste isolado: categorias em uma linha, com rolagem horizontal. -->
+  <!-- Ajuste visual isolado: filtros compactos em carrossel horizontal, como no exemplo. -->
   <style id="myranda-mobile-categorias-deslizantes">
-    body.premium-boutique #filterRow {
+    /* Esta regra vale em TODOS os tamanhos; os filtros jamais formam outra linha. */
+    html body.premium-boutique #catalogo #filterRow,
+    html body.premium-boutique #filterRow.filter-row {
       display: flex !important;
-      flex-flow: row nowrap !important;
+      display: -webkit-flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
       grid-template-columns: none !important;
-      overflow-x: auto !important;
-      overflow-y: hidden !important;
+      grid-auto-flow: unset !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      column-gap: 9px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
       max-width: 100% !important;
       min-width: 0 !important;
-      width: 100% !important;
-      gap: 14px !important;
-      padding-bottom: 10px !important;
+      box-sizing: border-box !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      padding: 2px 1px 10px !important;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior-x: contain;
       scroll-snap-type: x proximity;
+      scrollbar-width: none;
     }
-    body.premium-boutique #filterRow > .filter {
-      box-sizing: border-box;
-      flex: 0 0 206px !important;
-      min-width: 0 !important;
+    html body.premium-boutique #filterRow::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    /* Se o JavaScript criar filtros com outras classes, a barra continua em linha. */
+    html body.premium-boutique #filterRow > *,
+    html body.premium-boutique #catalogo #filterRow > .filter {
+      display: inline-flex !important;
+      flex: 0 0 auto !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      width: auto !important;
+      max-width: none !important;
+      min-width: max-content !important;
+      min-height: 45px !important;
+      height: auto !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 10px 14px !important;
       white-space: nowrap !important;
+      border-radius: 999px !important;
+      line-height: 1.2 !important;
       scroll-snap-align: start;
     }
-    @media (max-width: 767px) {
-      body.premium-boutique #filterRow { gap: 9px !important; }
-      body.premium-boutique #filterRow > .filter { flex-basis: 170px !important; }
+    html body.premium-boutique #filterRow > .filter {
+      font-size: 13px !important;
+    }
+    html body.premium-boutique #filterRow .premium-filter-count {
+      flex: 0 0 auto !important;
+      white-space: nowrap !important;
+      font-size: 11px !important;
+      padding: 4px 7px !important;
+      line-height: 1.1 !important;
+    }
+    @media (min-width: 768px) {
+      html body.premium-boutique #filterRow > * { min-height: 48px !important; padding: 12px 17px !important; }
     }
   </style>
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -182,7 +220,7 @@
           <button class="text-btn" id="showAll">Ver todas</button>
         </div>
         <p class="premium-filter-label">Escolha uma categoria:</p>
-        <div class="filter-row" id="filterRow"></div>
+        <div class="filter-row" id="filterRow" style="display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;max-width:100%!important;min-width:0!important;-webkit-overflow-scrolling:touch;"></div>
         <div class="premium-catalog-intro">
           <div>
             <h3 id="premiumCategoryTitle">Todos os modelos</h3>
