@@ -1,0 +1,109 @@
+name: Myranda - Categorias deslizantes no celular
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ajustar-categorias:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter versao atual do site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Aplicar ajuste somente nas categorias mobile
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          arquivo = Path('index.html')
+          if not arquivo.is_file():
+              raise SystemExit('index.html nao encontrado na raiz do repositorio. Nenhuma alteracao feita.')
+          html = arquivo.read_text(encoding='utf-8')
+          if 'id="filterRow"' not in html and "id='filterRow'" not in html:
+              raise SystemExit('A faixa #filterRow nao foi encontrada. Nenhuma alteracao feita para evitar mexer no layout errado.')
+          if not re.search(r'</head\s*>', html, re.I):
+              raise SystemExit('Nao foi encontrado </head>. Nenhuma alteracao feita.')
+
+          inicio = '<!-- MYRANDA_CATEGORIAS_MOBILE_INICIO -->'
+          fim = '<!-- MYRANDA_CATEGORIAS_MOBILE_FIM -->'
+          css = '''<!-- MYRANDA_CATEGORIAS_MOBILE_INICIO -->
+          <style id="myranda-categorias-deslizantes">
+          /* Apenas celulares: categorias do site principal em trilho horizontal. */
+          @media (max-width: 767px) {
+            #catalogo #filterRow,
+            #filterRow {
+              display: flex !important;
+              flex-direction: row !important;
+              flex-wrap: nowrap !important;
+              grid-template-columns: none !important;
+              gap: 9px !important;
+              width: 100% !important;
+              max-width: 100% !important;
+              min-width: 0 !important;
+              overflow-x: auto !important;
+              overflow-y: hidden !important;
+              -webkit-overflow-scrolling: touch;
+              scroll-behavior: smooth;
+              scroll-snap-type: x proximity;
+              scrollbar-width: none;
+              padding: 2px 1px 10px !important;
+              margin-bottom: 12px !important;
+              overscroll-behavior-x: contain;
+            }
+            #filterRow::-webkit-scrollbar { display: none !important; }
+            #catalogo #filterRow > button,
+            #filterRow > button {
+              flex: 0 0 auto !important;
+              display: inline-flex !important;
+              align-items: center !important;
+              justify-content: space-between !important;
+              flex-direction: row !important;
+              gap: 10px !important;
+              width: auto !important;
+              min-width: 126px !important;
+              max-width: none !important;
+              height: 51px !important;
+              min-height: 0 !important;
+              padding: 0 13px !important;
+              margin: 0 !important;
+              border-radius: 12px !important;
+              white-space: nowrap !important;
+              text-align: left !important;
+              scroll-snap-align: start;
+            }
+            #filterRow > button .premium-filter-count {
+              flex: 0 0 auto !important;
+              position: static !important;
+              margin-left: 4px !important;
+            }
+          }
+          </style>
+          <!-- MYRANDA_CATEGORIAS_MOBILE_FIM -->'''
+
+          # Pode executar novamente com seguranca; substitui a versao antiga do ajuste.
+          if inicio in html and fim in html:
+              html = re.sub(re.escape(inicio) + r'.*?' + re.escape(fim), css, html, flags=re.S, count=1)
+          else:
+              html = re.sub(r'</head\s*>', lambda m: css + '\n' + m.group(0), html, count=1, flags=re.I)
+
+          arquivo.write_text(html, encoding='utf-8')
+          print('Ajuste aplicado com sucesso; somente index.html foi modificado.')
+          PY
+      - name: Salvar mudanca no GitHub
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'Nenhuma alteracao necessaria.'
+          else
+            git commit -m 'Categorias mobile em faixa horizontal sem alterar o sistema'
+            git push origin HEAD:main
+          fi
