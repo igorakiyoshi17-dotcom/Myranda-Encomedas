@@ -21,6 +21,9 @@
 .category-list .chip.active{background:var(--wine);color:white;box-shadow:0 7px 21px #51203326}
 .category-list .chip-count{font-size:11px;color:#987e87;border-radius:100px;background:#f7eff0;padding:4px 8px;min-width:27px;text-align:center;font-variant-numeric:tabular-nums}
 .category-list .chip.active .chip-count{color:#fff;background:#ffffff30}
+/* Mantém o nome dentro do botão mesmo em categorias longas. */
+.category-list .chip > span:first-child{flex:1 1 auto;min-width:0;white-space:normal;line-height:1.35;overflow-wrap:break-word}
+.category-list .chip-count{flex:0 0 auto;white-space:nowrap}
 .category-heading{font-family:Georgia,serif;font-size:24px;font-weight:400;color:var(--wine);margin:20px 0 0}
 .category-context{font-size:12px;color:#907d82;margin:8px 0 0}
 .category-list .chip:focus-visible{outline:3px solid #bb8395;outline-offset:2px}
