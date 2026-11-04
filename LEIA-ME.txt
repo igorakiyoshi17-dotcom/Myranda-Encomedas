@@ -1,0 +1,48 @@
+MYRANDA PRATAS — CATÁLOGO DE ENCOMENDAS
+=======================================
+
+O QUE É
+Uma primeira versão funcional, personalizada, do catálogo de encomendas da Myranda.
+Busca por nome/código, filtros por categorias, seleção de joias e envio da seleção
+pelo WhatsApp. Não mostra preços nem permite pagamento pelo site.
+
+ATENÇÃO SOBRE O CONTEÚDO
+- Esta versão contém 12 modelos de exemplo com imagens vinculadas ao servidor de fotos
+  da Mya, obtidos de páginas públicas da fornecedora.
+- NÃO reproduz ainda as 67 páginas / todo o estoque da Mya.
+- O acesso às imagens depende da disponibilidade e das regras do servidor de imagens
+  da fornecedora. Se uma imagem falhar, aparece uma imagem de reserva.
+- As imagens são usadas considerando a autorização informada pela titular da loja;
+  confirme as condições de reutilização e, se possível, receba os arquivos originais.
+- O logo nesta versão é provisório (marca desenhada em vetor + tipografia).
+
+COMO TESTAR NO COMPUTADOR
+1. Descompacte o ZIP.
+2. Abra a pasta em um editor (por exemplo, VS Code).
+3. Para ver a versão demonstrativa, você pode abrir index.html diretamente.
+   Para carregar atualizações de produtos.json e para publicar, use um servidor local.
+   Exemplo com Python: python -m http.server 8000
+   Depois abra: http://localhost:8000
+
+COMO PUBLICAR
+Faça upload dos arquivos index.html e produtos.json em uma hospedagem de site
+estático (Vercel, Netlify ou similar). O endereço definitivo depende da hospedagem.
+Este pacote NÃO foi publicado automaticamente.
+
+COMO COLOCAR MAIS PEÇAS
+Atualize o arquivo 'produtos.json', mantendo os campos:
+  sku, nome, categoria, imagem, descricao, destaque
+A imagem deve ser um link HTTPS direto para a foto ou um caminho local hospedado.
+Não há campo de preço: ele não pode ser mostrado ao visitante por acidente.
+
+Importação no próprio navegador: no rodapé, toque em 'Importar catálogo (uso interno)'
+e envie JSON ou CSV. Observação: essa importação altera APENAS seu navegador.
+Para deixar disponível a todos os clientes, substitua produtos.json na hospedagem.
+
+TELEFONE USADO PARA ENCOMENDAS
+WhatsApp: (61) 99597-0024. Atualize a constante WA no código, se mudar.
+
+PRÓXIMO PASSO PARA COPIAR O CATÁLOGO INTEIRO
+Solicitar à Mya uma exportação de catálogo (planilha com código, título, categoria,
+fotos/URLs) e/ou um pacote de imagens. Com esses dados é possível popular todos os
+modelos sem inventar produtos, imagens ou disponibilidade.
