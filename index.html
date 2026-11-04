@@ -59,14 +59,14 @@ function saveSelection(){memorySelection=selected.slice();try{localStorage.setIt
 let products=[],category='Todos',selected=readSelection(),shown=24;
 
 const html=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const CATEGORY_ORDER=['Todos','Favoritos','Brincos','Argolas','Anéis','Colares','Pulseiras','Pingentes','Berloques','Masculino','Trios','Conjuntos','Escapulários','Correntes','Tornozeleiras','Piercings','Terços','Duplas','Outros'];
+const CATEGORY_ORDER=['Todos','Favoritos','Brincos','Argolas','Anéis','Colares','Pulseiras','Pingentes e Berloques','Masculino','Trios','Conjuntos','Escapulários','Correntes','Tornozeleiras','Piercings','Terços','Duplas','Outros'];
 function fold(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
 function categoryOf(p){
   const n=fold(p.nome||p.name),r=fold(p.categoria),sku=String(p.sku||p.codigo||'').toUpperCase();
   // A peça principal determina a categoria. Um colar com pingente continua na aba Colares.
   if (/^(trio|kit de? (?:brincos|argolas)|kit trio)\b/.test(n))return 'Trios';
-  if (/^(berloque|berloques|charm|separador (?:para )?(?:pulseira|berloque))\b/.test(n))return 'Berloques';
-  if (/^(pingente|pingentes|medalha avulsa|medalha para colar|placa para colar)\b/.test(n))return 'Pingentes';
+  if (/^(berloque|berloques|charm|separador (?:para )?(?:pulseira|berloque))\b/.test(n))return 'Pingentes e Berloques';
+  if (/^(pingente|pingentes|medalha avulsa|medalha para colar|placa para colar)\b/.test(n))return 'Pingentes e Berloques';
   if (/^(argola|argolinha|click)\b/.test(n)||/^brinco (?:de )?argola\b/.test(n))return 'Argolas';
   if (/^(piercing|ear ?cuff|earcuff)\b/.test(n))return 'Piercings';
   if (/^(brinco|brincos)\b/.test(n))return 'Brincos';
@@ -79,7 +79,7 @@ function categoryOf(p){
   if (/^terco\b/.test(n))return 'Terços';
   if (/^(dupla|duplo brinco)\b/.test(n))return 'Duplas';
   if (/^(conjunto|kit)\b/.test(n))return 'Conjuntos';
-  const aliases={'brincos':'Brincos','argolas':'Argolas','aneis':'Anéis','colares':'Colares','pulseiras':'Pulseiras','trios':'Trios','conjuntos':'Conjuntos','escapularios':'Escapulários','tornozeleiras':'Tornozeleiras','pingentes':'Pingentes','berloques':'Berloques','correntes':'Correntes','piercings':'Piercings','tercos':'Terços','duplas':'Duplas'};
+  const aliases={'brincos':'Brincos','argolas':'Argolas','aneis':'Anéis','colares':'Colares','pulseiras':'Pulseiras','trios':'Trios','conjuntos':'Conjuntos','escapularios':'Escapulários','tornozeleiras':'Tornozeleiras','pingentes':'Pingentes e Berloques','berloques':'Pingentes e Berloques','outros':'Pingentes e Berloques','pingentes e berloques':'Pingentes e Berloques','correntes':'Correntes','piercings':'Piercings','tercos':'Terços','duplas':'Duplas'};
   if(aliases[r])return aliases[r];
   if(sku.startsWith('AN'))return 'Anéis';
   if(sku.startsWith('PU'))return 'Pulseiras';
@@ -87,7 +87,9 @@ function categoryOf(p){
   if(sku.startsWith('ES'))return 'Escapulários';
   if(sku.startsWith('TR'))return 'Trios';
   if(sku.startsWith('BR'))return 'Brincos';
-  return 'Outros';
+  // Conforme a organização escolhida para a vitrine, todos os itens não categorizados
+  // anteriormente como Outros aparecem em Pingentes e Berloques.
+  return 'Pingentes e Berloques';
 }
 function isMasculino(p){
   const campos=[p.nome,p.categoriaOriginal,p.publico,p.genero,p.secao,...p.tags].map(fold).join(' ');
@@ -106,7 +108,7 @@ function normalize(p){
   const o={sku:String(p.sku||p.codigo||'').trim(),nome:String(p.nome||p.name||'').trim(),categoriaOriginal:String(p.categoria||''),imagem:primary,imagens:pics,descricao:String(p.descricao||p.description||'').trim(),destaque:p.destaque===true||p.destaque==='true',publico:String(p.publico||''),genero:String(p.genero||''),secao:String(p.secao||''),tags:Array.isArray(p.tags)?p.tags:[]};
   o.categoria=categoryOf(p);o.masculino=isMasculino(o);return o;
 }
-const load=async()=>{try{const response=await fetch('produtos.json',{cache:'no-store'});if(!response.ok)throw Error('Catálogo indisponível');products=await response.json()}catch(e){products=window.DEFAULT_PRODUCTS||[]}products=products.map(normalize).filter(p=>p.nome);if(category!=='Todos'&&category!=='Masculino'&&category!=='Favoritos'&&!products.some(p=>p.categoria===category))category='Todos';restoreListState();refreshDrawer();render()};
+const load=async()=>{try{const response=await fetch('produtos.json',{cache:'no-store'});if(!response.ok)throw Error('Catálogo indisponível');products=await response.json()}catch(e){products=window.DEFAULT_PRODUCTS||[]}products=products.map(normalize).filter(p=>p.nome);restoreListState();if(['Outros','Pingentes','Berloques'].includes(category))category='Pingentes e Berloques';if(category==='Masculino'&&!products.some(p=>p.masculino))category='Todos';if(!['Todos','Favoritos','Masculino'].includes(category)&&!products.some(p=>p.categoria===category))category='Todos';refreshDrawer();render()};
 function favoriteSkus(){try{const xs=JSON.parse(localStorage.getItem('myranda-encomendas-favoritos-v1')||'[]');return new Set(Array.isArray(xs)?xs:[])}catch{return new Set()}}
 function filterList(){let q=fold($('search').value),favorites=category==='Favoritos'?favoriteSkus():null;return products.filter(p=>(category==='Todos'||(category==='Masculino'?p.masculino:category==='Favoritos'?favorites.has(p.sku):p.categoria===category))&&(!q||fold(p.nome+' '+p.sku+' '+p.categoria).includes(q)))}
 function rememberListState(){try{sessionStorage.setItem('myranda-encomendas-lista',JSON.stringify({category,search:$('search').value,shown}))}catch{}}
@@ -115,8 +117,8 @@ function productUrl(sku){return 'produto.html?sku='+encodeURIComponent(sku)}
 
 function render(){
   const counts=products.reduce((acc,p)=>{acc[p.categoria]=(acc[p.categoria]||0)+1;return acc},{});
-  counts.Todos=products.length;counts.Favoritos=products.filter(p=>favoriteSkus().has(p.sku)).length;counts.Masculino=products.filter(p=>p.masculino).length;counts.Pingentes=counts.Pingentes||0;counts.Berloques=counts.Berloques||0;
-  const cats=CATEGORY_ORDER.filter(c=>counts[c]>0||['Pingentes','Berloques','Masculino','Favoritos'].includes(c));
+  counts.Todos=products.length;counts.Favoritos=products.filter(p=>favoriteSkus().has(p.sku)).length;counts.Masculino=products.filter(p=>p.masculino).length;
+  const cats=CATEGORY_ORDER.filter(c=>counts[c]>0||c==='Favoritos');
   $('categories').innerHTML=cats.map(c=>`<button type="button" role="tab" aria-selected="${c===category}" class="chip ${c===category?'active':''}" data-category="${html(c)}"><span>${html(c)}</span><span class="chip-count">${counts[c].toLocaleString('pt-BR')}</span></button>`).join('');
   document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;shown=24;render();$('category-heading').scrollIntoView({behavior:'smooth',block:'center'})}));
   $('category-heading').textContent=category==='Todos'?'Todos os modelos':category;
