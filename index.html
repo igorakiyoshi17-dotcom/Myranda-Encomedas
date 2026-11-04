@@ -1,148 +1,371 @@
-<!doctype html>
-<html lang="pt-BR"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="theme-color" content="#5b2033"/><meta name="description" content="Myranda Pratas — Catálogo de encomendas em Prata 925. Conheça as peças e solicite sua encomenda pelo WhatsApp."/>
-<title>Myranda Pratas · Catálogo de Encomendas</title>
-<style>
-:root{--wine:#61273a;--wine2:#8e4d5e;--cream:#fbf8f2;--milk:#fffdf9;--ink:#292326;--muted:#786d71;--line:#e9dfdb;--shadow:0 16px 42px #4e1d2e12}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--cream);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #c59ba7;outline-offset:3px}a{text-decoration:none;color:inherit}
-.wrap{width:min(1220px,calc(100% - 44px));margin:auto}.topbar{background:#5b2033;color:#fff6ef;text-align:center;font-size:11px;font-weight:650;letter-spacing:.16em;padding:11px 12px;text-transform:uppercase}.sitehead{position:sticky;top:0;z-index:20;background:#fffdfaee;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav{display:flex;align-items:center;justify-content:space-between;min-height:86px;gap:22px}.brand{display:flex;align-items:center;gap:10px;white-space:nowrap}.brandmark{width:39px;height:43px;color:var(--wine)}.brandtxt{font-family:Georgia,'Times New Roman',serif;font-size:25px;letter-spacing:.005em;color:var(--wine);font-weight:500}.brandtxt small{display:block;font-family:ui-sans-serif,sans-serif;letter-spacing:.31em;text-transform:uppercase;font-size:9px;text-align:center;margin-top:2px}.navlinks{display:flex;gap:24px;align-items:center}.navlinks a{font-size:13px;color:#554b4f}.navlinks a:hover{color:var(--wine)}.navright{display:flex;align-items:center;gap:12px}.outline-btn{border:1px solid #d9c3c8;background:transparent;border-radius:40px;padding:12px 19px;color:var(--wine);font-size:12px;font-weight:700}.bag{border:0;border-radius:100px;background:var(--wine);color:white;padding:11px 17px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}.bag-count{background:#fff5;min-width:20px;height:20px;border-radius:20px;display:grid;place-items:center;font-size:11px}
-.hero{background:radial-gradient(circle at 80% 30%,#f8eaec 0%,transparent 38%),linear-gradient(125deg,#fcf9f3 25%,#f1e8e0 100%);border-bottom:1px solid #e8ded8;overflow:hidden}.hero-inner{display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:50px;padding:65px 0 70px;min-height:430px}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--wine2);text-transform:uppercase;letter-spacing:.24em;font-size:11px;font-weight:700}.eyebrow::before{content:'';width:35px;height:1px;background:var(--wine2)}h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(42px,5vw,73px);font-weight:400;line-height:1.08;letter-spacing:-.04em;margin:20px 0;color:var(--wine)}h1 em{font-style:italic;color:#a46d7d}.hero p{font-size:15px;color:#706366;line-height:1.9;max-width:485px}.hero-buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}.primary{background:var(--wine);color:#fff;border:1px solid var(--wine);padding:14px 24px;border-radius:6px;font-size:13px;font-weight:700}.primary:hover{background:#481727}.secondary{background:#fff9;border:1px solid #d8c9ca;color:var(--wine);padding:14px 24px;border-radius:6px;font-size:13px;font-weight:700}.hero-right{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:center}.hero-tile{background:#fff;width:100%;aspect-ratio:4/5;border:10px solid #fffbf7;border-radius:105px 105px 12px 12px;box-shadow:var(--shadow);overflow:hidden}.hero-tile:nth-child(2){transform:translateY(28px)}.hero-tile img{width:100%;height:100%;object-fit:cover}.micro{padding:14px 0;background:#fffaf7;border-bottom:1px solid var(--line);text-align:center;color:#816c71;font-size:12px;letter-spacing:.04em}
-.section{padding:66px 0}.section-title{font-family:Georgia,serif;font-weight:400;color:var(--wine);font-size:39px;letter-spacing:-.035em;margin:0 0 7px}.sub{margin:0;color:var(--muted);font-size:14px;line-height:1.7}.category-list{display:flex;gap:10px;overflow:auto;padding:24px 0 10px;scrollbar-width:thin}.chip{padding:11px 18px;background:#fff;border:1px solid var(--line);border-radius:100px;white-space:nowrap;color:#796a6e;font-size:13px;font-weight:600;transition:.2s}.chip.active,.chip:hover{background:var(--wine);color:#fff;border-color:var(--wine)}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:22px 0 28px}.searchbox{background:white;display:flex;align-items:center;gap:9px;border:1px solid var(--line);padding:0 17px;border-radius:7px;width:min(430px,100%)}.searchbox input{background:transparent;border:0;outline:0;padding:15px 0;width:100%;font-size:13px}.count{color:#847477;font-size:12px}.products{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}.product{background:#fff;border:1px solid #eee5df;border-radius:9px;overflow:hidden;transition:.25s;min-width:0}.product:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.prod-img{background:linear-gradient(135deg,#f6f2ee,#ece6e1);aspect-ratio:1/1.13;position:relative;overflow:hidden}.prod-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}.product:hover img{transform:scale(1.03)}.chip-label{position:absolute;top:15px;left:15px;background:#fffdf8d9;color:#765867;font-size:10px;padding:8px 11px;letter-spacing:.09em;text-transform:uppercase;border-radius:3px}.prod-info{padding:19px}.sku{color:#94898a;font-size:10px;letter-spacing:.12em;margin:0 0 9px}.prod-name{font-family:Georgia,serif;color:#382c30;font-size:19px;line-height:1.4;margin:0 0 12px;min-height:52px}.prod-desc{color:#82777b;font-size:12px;line-height:1.7;min-height:40px;margin:0 0 18px}.prod-actions{display:grid;grid-template-columns:1fr auto;gap:8px}.add{background:#622739;color:white;border:none;border-radius:5px;padding:12px 11px;font-size:12px;font-weight:700}.view{background:#fcf8f6;border:1px solid #ecdfe0;color:#6d3f4f;border-radius:5px;padding:12px 12px;font-size:12px;font-weight:700}.note{padding:14px 18px;background:#fbf1ee;border-left:3px solid #c2929d;margin-top:27px;color:#79565f;font-size:12px;line-height:1.7}.empty{text-align:center;padding:65px;color:var(--muted);grid-column:1/-1}#more-products:focus-visible{outline:3px solid #b77e90}
-.how{background:#f5eeea;border-top:1px solid #eae0dc;border-bottom:1px solid #eae0dc;padding:58px 0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}.step{background:#fff;padding:28px;border:1px solid #efe7e1;border-radius:10px}.step-num{display:flex;justify-content:center;align-items:center;width:38px;height:38px;border:1px solid #d5b9bf;border-radius:100px;color:var(--wine);font-size:12px;margin-bottom:16px}.step h3{font-family:Georgia,serif;color:var(--wine);font-size:20px;font-weight:400;margin:0 0 10px}.step p{color:#85777b;font-size:13px;line-height:1.7;margin:0}footer{background:#542132;color:white;padding:45px 0 25px}.footer{display:flex;justify-content:space-between;gap:22px}.footer .brandtxt{color:white}.footer p{color:#f4dae2;font-size:12px;line-height:1.8}.copyright{text-align:center;border-top:1px solid #fff2;padding-top:22px;color:#e4c1cd;font-size:11px;margin-top:24px}
-.shade{position:fixed;inset:0;background:#24141c99;z-index:40;opacity:0;pointer-events:none;transition:.2s}.shade.open{opacity:1;pointer-events:auto}.drawer{position:fixed;top:0;right:0;bottom:0;width:min(450px,100%);z-index:50;background:white;box-shadow:-20px 0 50px #0002;transform:translateX(102%);transition:transform .25s;display:flex;flex-direction:column}.drawer.open{transform:none}.drawer-head{padding:25px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.drawer-head h2{font-family:Georgia,serif;color:var(--wine);font-size:28px;font-weight:400;margin:0}.icon-btn{border:0;background:#f9f2f1;border-radius:100px;width:34px;height:34px;font-size:18px;color:var(--wine)}.drawer-body{padding:22px;overflow-y:auto;flex:1}.chosen{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #eee}.chosen img{width:75px;height:80px;object-fit:cover;background:#eee;border-radius:5px}.chosen strong{font-family:Georgia,serif;font-size:16px;font-weight:400}.chosen .minis{color:var(--muted);font-size:12px;margin:4px 0 9px}.remove{border:0;background:transparent;color:#9b6877;text-decoration:underline;padding:0;font-size:11px}.drawer-foot{border-top:1px solid var(--line);padding:22px}.drawer-foot p{font-size:12px;color:var(--muted);line-height:1.6}.block{width:100%;display:block}.wa{background:#61273a;color:#fff;border:0;border-radius:6px;padding:17px 20px;width:100%;font-weight:700}.modal{position:fixed;z-index:52;inset:50% auto auto 50%;transform:translate(-50%,-44%) scale(.97);width:min(820px,calc(100vw - 30px));background:#fff;border-radius:10px;box-shadow:0 15px 80px #0004;display:none;grid-template-columns:1fr 1fr;overflow:hidden}.modal.open{display:grid;transform:translate(-50%,-50%) scale(1)}.modal-photo{width:100%;height:100%;min-height:370px;object-fit:cover;background:#f6f2ef}.modal-text{padding:36px;position:relative;display:flex;flex-direction:column}.modal-text h2{font-family:Georgia,serif;font-size:32px;font-weight:400;color:var(--wine);line-height:1.15}.modal-text p{color:var(--muted);font-size:13px;line-height:1.8}.close-modal{position:absolute;right:18px;top:18px}.modal-text .primary{margin-top:auto}.admin-toggle{opacity:.65;text-decoration:underline;cursor:pointer}.admin-tools{display:none;padding:16px 22px;background:#f6edf0;border-radius:8px;margin-top:14px}.admin-tools.visible{display:block}.admin-tools label{display:block;margin-bottom:6px;font-size:12px;font-weight:600}.admin-tools p{font-size:12px;color:#75636a}.admin-tools input{width:100%;margin:7px 0;padding:10px;font-size:12px}
-@media(max-width:900px){.products{grid-template-columns:repeat(3,1fr)}.hero-inner{gap:20px}.hero-right{max-width:400px}}@media(max-width:660px){.wrap{width:min(100% - 30px,540px)}.topbar{font-size:9px}.nav{min-height:72px}.brandtxt{font-size:20px}.brandmark{width:29px}.navlinks,.outline-btn{display:none}.hero-inner{grid-template-columns:1fr;padding:43px 0 52px}.hero-right{max-width:380px;margin:10px auto 14px;width:94%}.hero-tile{aspect-ratio:1/1}.hero h1{font-size:47px}.hero p{font-size:13px}.section{padding:44px 0}.section-title{font-size:33px}.toolbar{align-items:flex-start;flex-direction:column}.searchbox{width:100%}.products{grid-template-columns:repeat(2,1fr);gap:12px}.prod-info{padding:13px}.prod-name{font-size:16px;min-height:45px}.prod-desc{font-size:11px;min-height:56px}.prod-actions{grid-template-columns:1fr}.view{display:none}.steps{grid-template-columns:1fr;gap:12px}.footer{flex-direction:column}.modal{grid-template-columns:1fr;width:min(440px,calc(100vw - 30px));max-height:90vh;overflow:auto}.modal-photo{min-height:0;height:280px}.modal-text{padding:24px}.bag{padding:11px 13px;font-size:12px}}
-
-/* Abas de categorias — versão 2, preserva a identidade visual original */
-.category-guide{margin:22px 0 5px;color:#7c6970;font-size:13px}
-.category-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;overflow:visible;padding:15px 0 8px}
-.category-list .chip{display:flex;align-items:center;justify-content:space-between;text-align:left;gap:12px;min-width:0;padding:16px 15px;border-radius:9px;font-weight:650;box-shadow:0 3px 14px #51203307;background:#fffdfb;transition:background .18s,color .18s,transform .18s,border-color .18s}
-.category-list .chip:hover{transform:translateY(-2px)}
-.category-list .chip.active{background:var(--wine);color:white;box-shadow:0 7px 21px #51203326}
-.category-list .chip-count{font-size:11px;color:#987e87;border-radius:100px;background:#f7eff0;padding:4px 8px;min-width:27px;text-align:center;font-variant-numeric:tabular-nums}
-.category-list .chip.active .chip-count{color:#fff;background:#ffffff30}
-/* Mantém o nome dentro do botão mesmo em categorias longas. */
-.category-list .chip > span:first-child{flex:1 1 auto;min-width:0;white-space:normal;line-height:1.35;overflow-wrap:break-word}
-.category-list .chip-count{flex:0 0 auto;white-space:nowrap}
-.category-heading{font-family:Georgia,serif;font-size:24px;font-weight:400;color:var(--wine);margin:20px 0 0}
-.category-context{font-size:12px;color:#907d82;margin:8px 0 0}
-.category-list .chip:focus-visible{outline:3px solid #bb8395;outline-offset:2px}
-@media(max-width:660px){.category-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.category-list .chip{font-size:12px;padding:13px 11px;gap:7px}.category-list .chip-count{font-size:10px;padding:4px 6px}.category-heading{font-size:22px}}
-
-/* Fichas de produto: foto, título e botão abrem a página individual. */
-.prod-img-link{display:block;cursor:zoom-in}.prod-img-link:focus-visible{outline:3px solid #b77e90;outline-offset:-3px}
-.zoom-indicator{position:absolute;bottom:12px;right:12px;border-radius:100px;padding:7px 11px;background:#fffef4e8;color:var(--wine);font-size:11px;font-weight:650;opacity:0;transition:opacity .2s}
-.prod-img-link:hover .zoom-indicator,.prod-img-link:focus-visible .zoom-indicator{opacity:1}
-.prod-name a:hover{color:var(--wine2);text-decoration:underline;text-underline-offset:4px}
-.view{display:flex;justify-content:center;align-items:center;text-align:center}
-@media(max-width:660px){.view{display:flex;font-size:11px}.zoom-indicator{display:none}.prod-actions{grid-template-columns:1fr}}
-</style></head>
-<body>
-<div class="topbar">PRATA 925 · CATÁLOGO DE ENCOMENDAS · MYRANDA PRATAS</div>
-<header class="sitehead"><div class="wrap nav">
-<a class="brand" href="#inicio" aria-label="Myranda Pratas, início"><svg class="brandmark" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 18C16-2 2 14 11 25c8 10 21-7 21-7ZM32 18C48-2 62 14 53 25c-8 10-21-7-21-7Z" stroke="currentColor" stroke-width="3"/><path d="M28 23 18 51l13-8 9 11-3-30" stroke="currentColor" stroke-width="3"/><path d="m51 36 1.6 5 5.3.2-4.2 3.3 1.3 5.1-4-3.3-4.4 2.8 1.4-5-3.5-3.5 5.1.3z" fill="currentColor"/><circle cx="32" cy="20" r="4" fill="currentColor"/></svg><div class="brandtxt">Myranda Pratas<small>prata 925</small></div></a>
-<nav class="navlinks"><a href="#colecao">Coleção</a><a href="#como-funciona">Como encomendar</a><a href="#rodape">Contato</a></nav><div class="navright"><a class="outline-btn" href="#colecao">Ver catálogo</a><button class="bag" onclick="openDrawer()">♡ Minha seleção <span id="count-bag" class="bag-count">0</span></button></div>
-</div></header>
-<section id="inicio" class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">Myranda Pratas · por encomenda</div><h1>Encontre a joia que <em>combina com você.</em></h1><p>Uma seleção delicada de joias em Prata 925 para escolher com calma. Explore os modelos e solicite sua encomenda diretamente pelo nosso WhatsApp.</p><div class="hero-buttons"><a class="primary" href="#colecao">Explorar coleção</a><a class="secondary" href="#como-funciona">Como funciona</a></div></div><div class="hero-right"><div class="hero-tile"><img src="https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/12988/c70" onerror="broken(this)" alt="Colar de prata 925"/></div><div class="hero-tile"><img src="https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54621/c70" onerror="broken(this)" alt="Anel de prata 925"/></div></div></div></section>
-<div class="micro">♡ Seu estilo começa nos detalhes. &nbsp; · &nbsp; Encomendas mediante consulta de disponibilidade</div>
-<main><section id="colecao" class="section"><div class="wrap"><div class="eyebrow">Catálogo</div><h2 class="section-title">Escolha seus favoritos</h2><p class="sub">Navegue por modelos, salve o que gostar e peça uma cotação sem compromisso.</p><p class="category-guide">Escolha uma categoria:</p><div id="categories" class="category-list" role="tablist" aria-label="Categorias de joias"></div><h3 class="category-heading" id="category-heading">Todos os modelos</h3><p class="category-context" id="category-context">Selecione uma categoria para explorar os modelos.</p><div class="toolbar"><label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" aria-label="Buscar joias por nome ou código" type="search" placeholder="Busque por nome ou código..." autocomplete="off"/></label><span class="count" id="item-count"></span></div><div class="products" id="products"></div><div style="text-align:center;margin-top:28px"><button id="more-products" class="secondary" style="display:none;min-width:220px">Ver mais joias</button></div><div class="note">Este catálogo é para <strong>encomendas</strong>. Os modelos estão sujeitos à disponibilidade do fornecedor. Valores e prazos são informados pelo WhatsApp, após consulta.</div></div></section>
-<section id="como-funciona" class="how"><div class="wrap"><div class="eyebrow">Simples e prático</div><h2 class="section-title">Como encomendar</h2><div class="steps"><div class="step"><div class="step-num">01</div><h3>Explore a coleção</h3><p>Veja os modelos disponíveis no catálogo e escolha suas peças favoritas.</p></div><div class="step"><div class="step-num">02</div><h3>Monte sua seleção</h3><p>Toque em “Quero encomendar” nos produtos de que gostar. Não há pagamento pelo site.</p></div><div class="step"><div class="step-num">03</div><h3>Fale com a Myranda</h3><p>Envie sua seleção pelo WhatsApp. Confirmamos disponibilidade, valor, prazo e tamanho, quando aplicável.</p></div></div></div></section></main>
-<footer id="rodape"><div class="wrap"><div class="footer"><div><a class="brand" href="#inicio"><div class="brandtxt">Myranda Pratas<small>prata 925</small></div></a><p>Seu estilo começa nos detalhes.<br>Um jeito delicado de escolher o que combina com você.</p></div><div><strong style="font-family:Georgia,serif;font-weight:400;font-size:23px">Vamos conversar?</strong><p>Solicite sua encomenda e consulte os detalhes pelo WhatsApp.</p><a class="secondary" href="https://wa.me/5561995970024?text=Ol%C3%A1%2C%20quero%20conhecer%20o%20cat%C3%A1logo%20de%20encomendas" target="_blank" rel="noopener">Falar no WhatsApp</a></div></div><div class="copyright">© Myranda Pratas · Catálogo de encomendas · As imagens são ilustrativas dos modelos. Valores sob consulta.</div><div class="copyright" style="border:0;margin-top:0"><span class="admin-toggle" id="admin-open">Importar catálogo (uso interno)</span><div class="admin-tools" id="admin-tools"><label>Atualize o catálogo com um arquivo JSON ou CSV com as colunas: sku, nome, categoria, imagem, descricao, destaque</label><input id="import-file" type="file" accept=".json,.csv,application/json,text/csv"/><p>Esta importação é uma prévia temporária neste navegador. Para atualizar o catálogo para todos os visitantes, rode a ação de importação do GitHub ou substitua o arquivo <strong>produtos.json</strong> na hospedagem.</p><button class="outline-btn" id="reset-products">Restaurar catálogo publicado</button></div></div></div></footer>
-<div class="shade" id="shade" onclick="closeAll()"></div>
-<aside class="drawer" id="drawer" aria-label="Minha seleção"><div class="drawer-head"><h2>Minha seleção</h2><button class="icon-btn" onclick="closeAll()" aria-label="Fechar">×</button></div><div id="drawer-items" class="drawer-body"></div><div class="drawer-foot"><p>Os preços, o prazo e a disponibilidade serão confirmados pela nossa equipe antes do pedido.</p><button id="send-btn" class="wa" onclick="sendWhatsApp()">Enviar seleção no WhatsApp ↗</button></div></aside>
-<div id="modal" class="modal" role="dialog" aria-modal="true"><img id="modal-img" class="modal-photo" alt="Imagem da joia"/><div class="modal-text"><button class="icon-btn close-modal" onclick="closeAll()">×</button><span class="sku" id="modal-sku"></span><h2 id="modal-title"></h2><p id="modal-desc"></p><p>♡ Peça sob encomenda, mediante confirmação de disponibilidade.</p><button id="modal-add" class="primary">Adicionar à minha seleção</button></div></div>
-<script>
-window.DEFAULT_PRODUCTS=[{"sku":"AN1407","nome":"Anel Meia Aliança — Três Zircônias","categoria":"Anéis","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54621/c70","descricao":"Anel delicado em prata 925 com três zircônias. Numeração sob consulta.","destaque":true},{"sku":"AN519","nome":"Anel Solitário — Ponto de Luz","categoria":"Anéis","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/52640/c70","descricao":"Solitário delicado com zircônia de 5 mm. Numeração sob consulta.","destaque":true},{"sku":"AN745","nome":"Anel Estrela Cravejada","categoria":"Anéis","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54525/c70","descricao":"Anel em prata 925 com detalhe de estrela e zircônia. Numeração sob consulta."},{"sku":"AN1303","nome":"Anel Dupla Hera","categoria":"Anéis","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54814/c70","descricao":"Anel com desenho de folhas em prata 925. Numeração sob consulta."},{"sku":"PU1717","nome":"Pulseira Coração Cravejado","categoria":"Pulseiras","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54329/c70","descricao":"Pulseira com entremeio de coração cravejado, 16 + 4 cm.","destaque":true},{"sku":"PU1540","nome":"Pulseira Trevo Cravejado","categoria":"Pulseiras","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/50222/c70","descricao":"Pulseira delicada com detalhe de trevo em prata 925."},{"sku":"PU344","nome":"Pulseira Infantil — Cinco Bolinhas","categoria":"Pulseiras","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/55390/c70","descricao":"Pulseira infantil de 14 cm com alongadora e cinco bolinhas."},{"sku":"CO1948","nome":"Colar Coração com Zircônia","categoria":"Colares","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/12988/c70","descricao":"Colar delicado com pingente de coração e detalhe de zircônia. Comprimento: 45 cm.","destaque":true},{"sku":"BR3927","nome":"Brinco Duplo com Moissanites","categoria":"Brincos","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54355/c70","descricao":"Brinco delicado com moissanites de 5 e 8 mm e acabamento em ródio."},{"sku":"BR3925","nome":"Brinco Gota com Moissanite","categoria":"Brincos","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54352/c70","descricao":"Brinco com moissanite em formato de gota e detalhe cravejado."},{"sku":"BR3311","nome":"Argola Coração Esmeralda","categoria":"Argolas","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/54203/c70","descricao":"Argola click cravejada de 11 mm com pingente em formato de coração esmeralda."},{"sku":"ES366","nome":"Escapulário Medalhas Religiosas","categoria":"Escapulários","imagem":"https://imagedelivery.net/d1mS-EmuPZXAAQ9JtBMQIA/mya/produto/53425/c70","descricao":"Escapulário em prata 925 com medalhas religiosas e detalhe cravejado."}];
-const WA='5561995970024';
-const FALLBACK='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="680" viewBox="0 0 600 680"><rect width="600" height="680" fill="#f6f1ec"/><circle cx="300" cy="312" r="75" fill="none" stroke="#bca5ae" stroke-width="4"/><path d="M300 220c-40-40-88 14-50 52l50 45 50-45c38-38-10-92-50-52Z" fill="none" stroke="#ba9aa5" stroke-width="4"/><text x="300" y="450" text-anchor="middle" fill="#906b7b" font-family="Georgia" font-size="24">MYRANDA PRATAS</text><text x="300" y="478" text-anchor="middle" fill="#aa8b96" font-size="14" font-family="Arial">IMAGEM EM ATUALIZAÇÃO</text></svg>');
-function broken(i){i.onerror=null;i.src=FALLBACK}
-const $=id=>document.getElementById(id);const SELECTION_KEY='myranda-encomendas-selecao-v1';let memorySelection=[];
-function readSelection(){try{let a=JSON.parse(localStorage.getItem(SELECTION_KEY)||'[]');return Array.isArray(a)?a.filter(x=>x&&x.sku&&x.nome):[]}catch{return memorySelection.slice()}}
-function saveSelection(){memorySelection=selected.slice();try{localStorage.setItem(SELECTION_KEY,JSON.stringify(selected))}catch{}}
-let products=[],category='Todos',selected=readSelection(),shown=24;
-
-const html=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const CATEGORY_ORDER=['Todos','Favoritos','Brincos','Argolas','Anéis','Colares','Pulseiras','Trios','Conjuntos','Escapulários','Correntes','Tornozeleiras','Piercings','Terços','Duplas','Outros'];
-function fold(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
-function categoryOf(p){
-  const n=fold(p.nome||p.name),r=fold(p.categoria),sku=String(p.sku||p.codigo||'').toUpperCase();
-  // A peça principal determina a categoria. Um colar com pingente continua na aba Colares.
-  if (/^(trio|kit de? (?:brincos|argolas)|kit trio)\b/.test(n))return 'Trios';
-  if (/^(berloque|berloques|charm|separador (?:para )?(?:pulseira|berloque))\b/.test(n))return 'Outros';
-  if (/^(pingente|pingentes|medalha avulsa|medalha para colar|placa para colar)\b/.test(n))return 'Outros';
-  if (/^(argola|argolinha|click)\b/.test(n)||/^brinco (?:de )?argola\b/.test(n))return 'Argolas';
-  if (/^(piercing|ear ?cuff|earcuff)\b/.test(n))return 'Piercings';
-  if (/^(brinco|brincos)\b/.test(n))return 'Brincos';
-  if (/^(anel|aneis|alianca)\b/.test(n))return 'Anéis';
-  if (/^(pulseira|bracelete)\b/.test(n))return 'Pulseiras';
-  if (/^(colar|gargantilha|choker)\b/.test(n))return 'Colares';
-  if (/^corrente\b/.test(n))return 'Correntes';
-  if (/^escapulario\b/.test(n))return 'Escapulários';
-  if (/^tornozeleira\b/.test(n))return 'Tornozeleiras';
-  if (/^terco\b/.test(n))return 'Terços';
-  if (/^(dupla|duplo brinco)\b/.test(n))return 'Duplas';
-  if (/^(conjunto|kit)\b/.test(n))return 'Conjuntos';
-  const aliases={'brincos':'Brincos','argolas':'Argolas','aneis':'Anéis','colares':'Colares','pulseiras':'Pulseiras','trios':'Trios','conjuntos':'Conjuntos','escapularios':'Escapulários','tornozeleiras':'Tornozeleiras','pingentes':'Outros','berloques':'Outros','correntes':'Correntes','piercings':'Piercings','tercos':'Terços','duplas':'Duplas'};
-  if(aliases[r])return aliases[r];
-  if(sku.startsWith('AN'))return 'Anéis';
-  if(sku.startsWith('PU'))return 'Pulseiras';
-  if(sku.startsWith('CO'))return 'Colares';
-  if(sku.startsWith('ES'))return 'Escapulários';
-  if(sku.startsWith('TR'))return 'Trios';
-  if(sku.startsWith('BR'))return 'Brincos';
-  return 'Outros';
-}
-function isMasculino(p){
-  const campos=[p.nome,p.categoriaOriginal,p.publico,p.genero,p.secao,...p.tags].map(fold).join(' ');
-  if(/\b(masculino|masculina|masculinos|masculinas)\b/.test(campos))return true;
-  // Estilos sugeridos para a vitrine masculina, sem retirar a peça da categoria principal.
-  const n=fold(p.nome);
-  if(/^(?:pulseira|bracelete)\b/.test(n)&&/\b(?:grumet|figaro|elo portugues|elos grossos|malha grossa)\b/.test(n)&&/\b(?:20|21|22|23|24)(?:\+\d+)?\s*cm\b/.test(n))return true;
-  if(/^(?:corrente|cordao)\b/.test(n)&&/\b(?:55|60|65|70|75|80)\s*cm\b/.test(n)&&/\b(?:grumet|figaro|cartier|elo portugues|veneziana|cordao)\b/.test(n))return true;
-  return false;
-}
-function normalize(p){
-  const rawImages=Array.isArray(p.imagens)?p.imagens:Array.isArray(p.fotos)?p.fotos:[];
-  const pics=rawImages.map(x=>typeof x==='string'?x:(x?.url||x?.src||'')).filter(x=>/^https:\/\//i.test(x));
-  const primary=String(p.imagem||p.image||pics[0]||'').trim();
-  if(primary&&!pics.includes(primary))pics.unshift(primary);
-  const o={sku:String(p.sku||p.codigo||'').trim(),nome:String(p.nome||p.name||'').trim(),categoriaOriginal:String(p.categoria||''),imagem:primary,imagens:pics,descricao:String(p.descricao||p.description||'').trim(),destaque:p.destaque===true||p.destaque==='true',publico:String(p.publico||''),genero:String(p.genero||''),secao:String(p.secao||''),tags:Array.isArray(p.tags)?p.tags:[]};
-  o.categoria=categoryOf(p);o.masculino=isMasculino(o);return o;
-}
-const load=async()=>{try{const response=await fetch('produtos.json',{cache:'no-store'});if(!response.ok)throw Error('Catálogo indisponível');products=await response.json()}catch(e){products=window.DEFAULT_PRODUCTS||[]}products=products.map(normalize).filter(p=>p.nome);if(category!=='Todos'&&category!=='Masculino'&&category!=='Favoritos'&&!products.some(p=>p.categoria===category))category='Todos';restoreListState();refreshDrawer();render()};
-function favoriteSkus(){try{const xs=JSON.parse(localStorage.getItem('myranda-encomendas-favoritos-v1')||'[]');return new Set(Array.isArray(xs)?xs:[])}catch{return new Set()}}
-function filterList(){let q=fold($('search').value),favorites=category==='Favoritos'?favoriteSkus():null;return products.filter(p=>(category==='Todos'||(category==='Masculino'?p.masculino:category==='Favoritos'?favorites.has(p.sku):p.categoria===category))&&(!q||fold(p.nome+' '+p.sku+' '+p.categoria).includes(q)))}
-function rememberListState(){try{sessionStorage.setItem('myranda-encomendas-lista',JSON.stringify({category,search:$('search').value,shown}))}catch{}}
-function restoreListState(){try{const s=JSON.parse(sessionStorage.getItem('myranda-encomendas-lista')||'null');if(s&&location.hash==='#colecao'){category=({'Pingentes':'Outros','Berloques':'Outros','Masculino':'Todos'}[s.category]||s.category||'Todos');shown=s.shown||24;$('search').value=s.search||''}}catch{}}
-function productUrl(sku){return 'produto.html?sku='+encodeURIComponent(sku)}
-
-function render(){
-  const counts=products.reduce((acc,p)=>{acc[p.categoria]=(acc[p.categoria]||0)+1;return acc},{});
-  counts.Todos=products.length;counts.Favoritos=products.filter(p=>favoriteSkus().has(p.sku)).length;
-  const cats=CATEGORY_ORDER.filter(c=>counts[c]>0||c==='Favoritos');
-  $('categories').innerHTML=cats.map(c=>`<button type="button" role="tab" aria-selected="${c===category}" class="chip ${c===category?'active':''}" data-category="${html(c)}"><span>${html(c==='Outros'?'Pingentes e Berloques':c)}</span><span class="chip-count">${counts[c].toLocaleString('pt-BR')}</span></button>`).join('');
-  document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;shown=24;render();$('category-heading').scrollIntoView({behavior:'smooth',block:'center'})}));
-  $('category-heading').textContent=category==='Todos'?'Todos os modelos':category==='Outros'?'Pingentes e Berloques':category;
-  $('category-context').textContent=category==='Todos'?'Explore todas as categorias ou escolha uma aba acima.':category==='Favoritos'?'As joias salvas nos seus favoritos aparecem aqui neste navegador.':category==='Outros'?'Exibindo os modelos de Pingentes e Berloques. Para ver outras joias, escolha outra aba.':'Exibindo apenas '+category.toLowerCase()+'. Para ver outras joias, escolha outra aba.';
-  const arr=filterList();
-  const visible=arr.slice(0,shown);
-  $('item-count').textContent=arr.length?`${Math.min(shown,arr.length)} de ${arr.length} ${arr.length===1?'modelo':'modelos'}`:'Nenhum modelo encontrado';
-  $('products').innerHTML=arr.length?visible.map(p=>`<article class="product"><a class="prod-img prod-img-link" href="${html(productUrl(p.sku))}" data-detail-link aria-label="Ver detalhes de ${html(p.nome)}"><img src="${html(p.imagem||FALLBACK)}" onerror="broken(this)" loading="lazy" alt="${html(p.nome)}"/><span class="chip-label">PRATA 925</span><span class="zoom-indicator">⌕ Ver a joia</span></a><div class="prod-info"><p class="sku">CÓD. ${html(p.sku)}</p><h3 class="prod-name"><a href="${html(productUrl(p.sku))}" data-detail-link>${html(p.nome)}</a></h3><p class="prod-desc">${html(p.descricao)}</p><div class="prod-actions"><button class="add" data-add="${html(p.sku)}">♡ Quero encomendar</button><a class="view" href="${html(productUrl(p.sku))}" data-detail-link>Ver detalhes ↗</a></div></div></article>`).join(''):'<div class="empty">Nenhuma peça encontrada nessa categoria. Experimente a aba Todos ou outra busca.</div>';
-  const more=$('more-products');
-  more.style.display=arr.length>shown?'inline-block':'none';
-  more.textContent=`Ver mais joias (${Math.min(24,arr.length-shown)} próximas)`;
-  document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>addProduct(b.dataset.add)));
-  document.querySelectorAll('[data-detail-link]').forEach(a=>a.addEventListener('click',rememberListState));
-}
-$('more-products').addEventListener('click',()=>{shown+=24;render()});
-function addProduct(sku){const p=products.find(x=>x.sku===sku);if(!p)return;selected.push({sku:p.sku,nome:p.nome,imagem:p.imagem});saveSelection();refreshDrawer();openDrawer()}
-function refreshDrawer(){$('count-bag').textContent=selected.length;$('drawer-items').innerHTML=selected.length?selected.map((p,i)=>`<div class="chosen"><img alt="${html(p.nome)}" src="${html(p.imagem||FALLBACK)}" onerror="broken(this)"/><div><strong>${html(p.nome)}</strong><div class="minis">Código: ${html(p.sku)}</div><button class="remove" data-remove="${i}">Remover da seleção</button></div></div>`).join(''):'<p style="color:#8e7880;line-height:1.8">Sua seleção está vazia. Adicione as joias que deseja consultar.</p>';document.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{selected.splice(Number(b.dataset.remove),1);saveSelection();refreshDrawer()}));$('send-btn').disabled=!selected.length;$('send-btn').style.opacity=selected.length?'1':'.5'}
-function openDrawer(){$('shade').classList.add('open');$('drawer').classList.add('open');$('modal').classList.remove('open');document.body.style.overflow='hidden'}
-function closeAll(){$('shade').classList.remove('open');$('drawer').classList.remove('open');$('modal').classList.remove('open');document.body.style.overflow=''}
-function detail(sku){rememberListState();window.location.href=productUrl(sku)}
-function sendWhatsApp(){if(!selected.length)return;const items=selected.map((p,i)=>`${i+1}. ${p.nome} (cód. ${p.sku})`).join('\n');const msg=`Olá! Vi o catálogo de encomendas da Myranda Pratas e gostaria de consultar disponibilidade, preços e prazos destas peças:\n\n${items}\n\nPodem me ajudar?`;window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank','noopener')}
-$('search').addEventListener('input',()=>{shown=24;render()});window.addEventListener('pageshow',()=>{selected=readSelection();refreshDrawer();if(products.length)render()});$('admin-open').addEventListener('click',()=>{$('admin-tools').classList.toggle('visible')});$('reset-products').addEventListener('click',()=>{load()});$('import-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const str=await f.text();let rows;if(f.name.endsWith('.json')){rows=JSON.parse(str)}else{const lines=str.replace(/\r/g,'').split('\n').filter(x=>x.trim());const split=(s)=>{let out=[],part='',quote=false;for(let i=0;i<s.length;i++){const c=s[i];if(c==='"'&&s[i+1]==='"'&&quote){part+='"';i++}else if(c==='"'){quote=!quote}else if(c===','&&!quote){out.push(part);part=''}else part+=c}out.push(part);return out};const headers=split(lines.shift());rows=lines.map(l=>Object.fromEntries(split(l).map((v,i)=>[headers[i],v])))}if(!Array.isArray(rows))throw Error('Formato de catálogo inválido');products=rows.map(normalize).filter(p=>p.nome);// Importação de teste somente neste navegador até atualizar o GitHub.
-category='Todos';shown=24;$('search').value='';render();alert(`${products.length} modelos importados neste navegador. Para publicar para todos, envie o arquivo à hospedagem.`)}catch(ex){alert('Não consegui importar: '+ex.message)}});
-window.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});refreshDrawer();load();
-</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#64223d">
+  <meta name="google-site-verification" content="fYG1hCP8jU2A4NxeU1qpyG-1FW6G8xIMDSJrLlhMIgE">
+  <title>Myranda Pratas | Joias em Prata 925</title>
+  <meta name="description" content="Descubra joias em Prata 925 na Myranda Pratas. Anéis, brincos, colares, pulseiras e conjuntos delicados para todos os momentos.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="applebot" content="all">
+  <meta name="apple-mobile-web-app-title" content="Myranda Pratas">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="canonical" href="https://myrandapratas.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="application-name" content="Myranda Pratas">
+  <meta property="og:site_name" content="Myranda Pratas">
+  <meta property="og:title" content="Myranda Pratas | Joias em Prata 925">
+  <meta property="og:description" content="Joias delicadas em Prata 925. Explore anéis, brincos, colares, pulseiras e conjuntos da Myranda Pratas.">
+  <meta property="og:url" content="https://myrandapratas.vercel.app/">
+  <meta property="og:image" content="https://myrandapratas.vercel.app/icon-512.png">
+  <meta property="og:image:alt" content="Myranda Pratas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Myranda Pratas | Joias em Prata 925">
+  <meta name="twitter:description" content="Joias delicadas em Prata 925 para todos os momentos.">
+  <meta name="twitter:image" content="https://myrandapratas.vercel.app/icon-512.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://myrandapratas.vercel.app/#organization",
+        "name": "Myranda Pratas",
+        "alternateName": "Myranda",
+        "description": "Joias em Prata 925: anéis, brincos, colares, pulseiras e conjuntos delicados.",
+        "url": "https://myrandapratas.vercel.app/",
+        "logo": "https://myrandapratas.vercel.app/icon-512.png",
+        "sameAs": ["https://www.instagram.com/myrandapratas/"],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+55-61-99597-0024",
+          "contactType": "customer service",
+          "availableLanguage": "pt-BR"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://myrandapratas.vercel.app/#website",
+        "url": "https://myrandapratas.vercel.app/",
+        "name": "Myranda Pratas",
+        "alternateName": ["Myranda", "Myranda Pratas 925"],
+        "inLanguage": "pt-BR",
+        "publisher": {"@id": "https://myrandapratas.vercel.app/#organization"}
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="myranda-premium.css">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    .myranda-about{max-width:1180px;margin:0 auto;padding-top:54px;padding-bottom:54px;}
+    .myranda-about-text{max-width:760px;margin:0;color:#6f5b52;font-size:15px;line-height:1.8;}
+    @media(max-width:600px){
+      .myranda-about{padding-top:36px!important;padding-bottom:38px!important;}
+      .myranda-about .section-heading h2{font-size:30px!important;line-height:1.05!important;}
+      .myranda-about-text{font-size:13px;line-height:1.7;}
+    }
+  </style>
+  <style id="hero-mobile-final">
+    @media (max-width: 600px) {
+      .hero-content h1{font-size:clamp(2.8rem,12vw,3.25rem)!important;line-height:1.04!important;letter-spacing:0!important;word-spacing:0.08em!important;max-width:none!important;}
+      .hero-content h1 .hero-first-line,.hero-content h1 .hero-second-line{display:inline-block!important;white-space:nowrap!important;}
+      .hero-content h1 .hero-second-line{margin-left:1.15rem!important;font-size:0.92em!important;letter-spacing:0!important;word-spacing:0.08em!important;}
+      .hero-copy{max-width:320px!important;}
+    }
+  </style>
+  <!-- ÚNICA MUDANÇA FUNCIONAL: filtros de categorias rolam na horizontal em telas pequenas. -->
+  <style id="myranda-mobile-categorias-deslizantes">
+    @media (max-width: 767px) {
+      body.premium-boutique #filterRow {
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        grid-template-columns: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        gap: 9px !important;
+        margin: 0 0 24px !important;
+        padding: 2px 1px 10px !important;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x pan-y;
+      }
+      body.premium-boutique #filterRow::-webkit-scrollbar { display: none; }
+      body.premium-boutique #filterRow .filter {
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: auto !important;
+        min-width: max-content !important;
+        min-height: 44px !important;
+        margin: 0 !important;
+        padding: 10px 14px !important;
+        gap: 11px !important;
+        white-space: nowrap !important;
+        scroll-snap-align: start;
+      }
+      body.premium-boutique .section.premium-catalog { min-width: 0 !important; }
+    }
+  </style>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body class="premium-boutique">
+  <div class="app-shell">
+    <div class="premium-announcement">PRATA 925 · JOIAS SELECIONADAS · MYRANDA PRATAS</div>
+    <header class="topbar" id="topo">
+      <div class="premium-header-inner">
+        <a class="brand-mini premium-brand" href="#inicio" aria-label="Myranda Pratas — início">
+          <svg class="premium-bow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54" fill="none" aria-hidden="true">
+            <path d="M26 24C16 7 3 12 5 23c2 8 14 7 21 3M28 24c10-17 23-13 21-1-1 8-14 8-21 3M25 25l-6 19 9-6 8 6-7-19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 24c3-2 5-2 7 1-2 5-5 5-7-1Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 44v7m-4-3.5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="premium-brand-text">Myranda Pratas<small>PRATA 925</small></span>
+        </a>
+        <nav class="premium-header-nav" aria-label="Menu da loja">
+          <a href="#catalogo">Coleção</a>
+          <a href="#como-comprar">Como comprar</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <div class="premium-header-actions">
+          <button class="selection-top favorites-top premium-favorite" id="openFavoritesTop" aria-label="Abrir favoritos" type="button">♡</button>
+          <a href="#catalogo" class="premium-header-link">Ver catálogo</a>
+          <button class="selection-top premium-header-selection" id="openSelectionTop" aria-label="Abrir minha seleção" type="button">
+            <span class="bag-icon">♡ Minha seleção</span>
+            <span class="top-count" id="topCount">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="hero hero-myranda premium-hero" id="inicio">
+        <div class="premium-hero-inner">
+          <div class="hero-content">
+            <p class="eyebrow premium-rule">MYRANDA PRATAS · PRATA 925</p>
+            <h1><span class="hero-first-line">Do seu jeito.</span><br><em class="hero-second-line">Em cada escolha</em></h1>
+            <p class="hero-copy">Seu estilo começa nos detalhes.<br><em><strong>Prata 925</strong> para quem faz da presença uma assinatura.</em></p>
+            <div class="premium-hero-actions">
+              <button class="primary-btn hero-btn" id="goCatalog">Explorar coleção</button>
+              <a href="#como-comprar" class="premium-outline-btn">Como comprar</a>
+            </div>
+          </div>
+          <div class="premium-hero-photos" aria-label="Joias em prata 925 da Myranda">
+            <figure class="premium-photo premium-photo-first">
+              <img id="premiumHeroPhotoA" src="icon-512.png" alt="Joia da coleção Myranda Pratas" loading="eager" decoding="async">
+            </figure>
+            <figure class="premium-photo premium-photo-second">
+              <img id="premiumHeroPhotoB" src="icon-512.png" alt="Outra joia da coleção Myranda Pratas" loading="eager" decoding="async">
+            </figure>
+            <span class="premium-jewel-glimmer" aria-hidden="true">✧</span>
+          </div>
+        </div>
+      </section>
+      <div class="premium-message-strip">♡ Seu estilo começa nos detalhes. <span>·</span> Prata 925 para quem faz da presença uma assinatura.</div>
+      <!-- Estrutura mantida para compatibilidade com o JS de categorias existente. -->
+      <section class="section categories-section premium-category-hook" id="categorias" aria-label="Categorias">
+        <div class="category-grid" id="categoryGrid"></div>
+      </section>
+      <section class="section premium-catalog" id="catalogo">
+        <div class="section-heading catalog-heading">
+          <div>
+            <span class="eyebrow premium-rule">CATÁLOGO</span>
+            <h2>Escolha seus favoritos</h2>
+            <p class="premium-catalog-desc">Explore as joias, encontre suas preferidas e monte sua seleção com calma.</p>
+          </div>
+          <button class="text-btn" id="showAll">Ver todas</button>
+        </div>
+        <p class="premium-filter-label">Escolha uma categoria:</p>
+        <div class="filter-row" id="filterRow"></div>
+        <div class="premium-catalog-intro">
+          <div>
+            <h3 id="premiumCategoryTitle">Todos os modelos</h3>
+            <p>Joias selecionadas em Prata 925.</p>
+          </div>
+        </div>
+        <div class="premium-search-line">
+          <label class="premium-search-wrap" for="premiumSearch">
+            <span aria-hidden="true">⌕</span>
+            <input id="premiumSearch" type="search" placeholder="Busque por nome ou código..." autocomplete="off" aria-label="Buscar joias por nome ou código">
+          </label>
+          <span id="premiumProductCount" class="premium-product-count" aria-live="polite"></span>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+        <div class="premium-more-wrap"><button type="button" id="premiumMoreProducts" class="premium-more-btn" hidden>Ver mais joias</button></div>
+        <div class="premium-catalog-note">Este catálogo apresenta joias disponíveis para seleção. A disponibilidade é confirmada na finalização pelo WhatsApp.</div>
+      </section>
+      <section id="productDetails" class="product-details" hidden>
+        <button type="button" id="backToCatalogDetails" class="text-btn">← Voltar ao catálogo</button>
+        <div id="productDetailsContent"></div>
+      </section>
+      <section id="como-comprar" class="premium-steps">
+        <div class="premium-wide-inner">
+          <span class="eyebrow premium-rule">SIMPLES E PRÁTICO</span>
+          <h2>Como comprar</h2>
+          <div class="premium-step-grid">
+            <article class="premium-step"><span class="premium-step-num">01</span><h3>Explore a coleção</h3><p>Veja as joias disponíveis e escolha as peças que mais combinam com você.</p></article>
+            <article class="premium-step"><span class="premium-step-num">02</span><h3>Monte sua seleção</h3><p>Adicione suas favoritas, confira os valores e confirme com seu nome.</p></article>
+            <article class="premium-step"><span class="premium-step-num">03</span><h3>Fale com a Myranda</h3><p>Envie sua seleção pelo WhatsApp para combinar o pagamento e a entrega.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="selection-bar" id="selectionBar" hidden>
+      <div><span id="selectionBarCount">0 peças</span><strong id="selectionBarTotal">R$ 0,00</strong></div>
+      <button class="primary-btn" id="openSelection">Minha seleção <span>→</span></button>
+    </div>
+    <nav class="bottom-nav" aria-label="Navegação">
+      <a href="#inicio" class="nav-item active"><span>⌂</span><small>Início</small></a>
+      <a href="#categorias" class="nav-item"><span>⌑</span><small>Categorias</small></a>
+      <button class="nav-item nav-favorites" id="openFavoritesBottom" type="button"><span>♡<b id="favoriteCountBottom">0</b></span><small>Favoritos</small></button>
+      <button class="nav-item nav-selection" id="openSelectionBottom"><span>♡<b id="bottomCount">0</b></span><small>Minha seleção</small></button>
+    </nav>
+  </div>
+  <div class="modal-backdrop" id="favoritesModal" aria-hidden="true">
+    <section class="selection-modal favorites-modal" role="dialog" aria-modal="true" aria-labelledby="favoritesTitle">
+      <button type="button" class="close-btn" id="closeFavorites" aria-label="Fechar favoritos">×</button>
+      <div class="modal-header"><span class="eyebrow">SUAS PEÇAS PREFERIDAS</span><h2 id="favoritesTitle">Meus favoritos</h2><p>Salve suas joias favoritas e escolha quando quiser.</p></div>
+      <div class="favorites-grid" id="favoritesList"></div>
+    </section>
+  </div>
+  <div class="modal-backdrop" id="selectionModal" aria-hidden="true">
+    <section class="selection-modal" role="dialog" aria-modal="true" aria-labelledby="selectionTitle">
+      <button class="close-btn" id="closeSelection" aria-label="Fechar">×</button>
+      <div class="modal-header"><span class="eyebrow">SUA ESCOLHA</span><h2 id="selectionTitle">Minha seleção</h2><p>Revise suas peças antes de confirmar.</p></div>
+      <div class="selection-list" id="selectionList"></div>
+      <div class="selection-footer">
+        <div class="selection-name-field">
+          <label for="customerName">Seu nome</label>
+          <input id="customerName" type="text" maxlength="80" autocomplete="name" placeholder="Digite seu nome" aria-describedby="customerNameHelp">
+          <small id="customerNameHelp">Usaremos seu nome para identificar sua seleção.</small>
+        </div>
+        <div class="total-line"><span>Total</span><strong id="modalTotal">R$ 0,00</strong></div>
+        <button class="primary-btn confirm-btn" id="confirmSelection">Confirmar seleção <span>→</span></button>
+        <p class="microcopy">Sem pagamento online. Esta seleção serve para separar e organizar suas peças.</p>
+      </div>
+    </section>
+  </div>
+  <div class="modal-backdrop" id="successModal" aria-hidden="true">
+    <section class="success-modal" role="dialog" aria-modal="true">
+      <div class="success-mark">✓</div>
+      <span class="eyebrow">SELEÇÃO CRIADA</span>
+      <h2>Prontinho! ✨</h2>
+      <p>Sua seleção foi registrada em nome de:</p>
+      <div class="selection-code" id="selectionCustomerName">Cliente</div>
+      <div class="success-summary" id="successSummary"></div>
+      <button class="primary-btn" id="sendWhatsApp" style="margin-bottom:10px;">Enviar seleção pelo WhatsApp <span>→</span></button>
+      <button class="primary-btn" id="backToCatalog">Continuar navegando <span>→</span></button>
+    </section>
+  </div>
+  <div class="modal-backdrop photo-zoom-modal" id="photoZoomModal" aria-hidden="true">
+    <section class="photo-zoom-content" role="dialog" aria-modal="true" aria-label="Foto ampliada da joia">
+      <button type="button" class="photo-zoom-close" id="closePhotoZoom" aria-label="Fechar foto ampliada">×</button>
+      <img id="zoomedProductImage" alt="" />
+      <p id="zoomedProductName"></p>
+    </section>
+  </div>
+  <div class="toast" id="toast"></div>
+  <section class="section myranda-about" aria-labelledby="sobre-myranda">
+    <div class="section-heading"><div><span class="eyebrow">SOBRE A MYRANDA</span><h2 id="sobre-myranda">Myranda Pratas · Joias em Prata 925</h2></div></div>
+    <p class="myranda-about-text">A Myranda Pratas reúne joias delicadas em Prata 925 para acompanhar diferentes estilos e momentos. Explore anéis, brincos, colares, pulseiras e conjuntos selecionados com cuidado para valorizar cada detalhe.</p>
+  </section>
+  <footer class="myranda-footer" id="contato">
+    <div class="footer-content premium-footer-inner">
+      <div>
+        <h2>Myranda Pratas<small>PRATA 925</small></h2>
+        <p class="footer-text">Seu estilo começa nos detalhes.<br>Joias para valorizar a sua presença.</p>
+      </div>
+      <div class="premium-footer-contact">
+        <h3>Vamos conversar?</h3>
+        <p>Escolha suas peças favoritas e conclua sua seleção pelo WhatsApp.</p>
+        <div class="footer-contacts">
+          <a href="https://wa.me/5561995970024" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a href="https://www.instagram.com/myrandapratas/" target="_blank" rel="noopener">Instagram · @myrandapratas</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Myranda Pratas · Joias em Prata 925 · Seu estilo começa nos detalhes.</p>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+  /* Visual boutique: fotos do próprio catálogo, busca e paginação; não altera pedidos nem Supabase. */
+  (function(){
+    const grade=document.getElementById('productGrid');
+    const filtros=document.getElementById('filterRow');
+    const busca=document.getElementById('premiumSearch');
+    const mais=document.getElementById('premiumMoreProducts');
+    const contador=document.getElementById('premiumProductCount');
+    const titulo=document.getElementById('premiumCategoryTitle');
+    let quantidadeVisivel=24;
+    let fotosPreenchidas=false;
+    let debounce=false;
+    function obterProdutos(){try {return typeof products !== 'undefined' && Array.isArray(products) ? products : [];}catch(_){return [];}}
+    function normalizar(txt){return String(txt||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
+    function escolherFotos(){
+      if(fotosPreenchidas) return;
+      const lista=obterProdutos().filter(p=>p.image);
+      if(!lista.length) return;
+      const primeiro=lista.find(p=>/colar|corrente|pingente/i.test(p.category+' '+p.name))||lista[0];
+      const segundo=lista.find(p=>p.id!==primeiro.id && /anel|alianca/i.test(p.category+' '+p.name))||lista.find(p=>p.id!==primeiro.id);
+      const a=document.getElementById('premiumHeroPhotoA');
+      const b=document.getElementById('premiumHeroPhotoB');
+      if(a){a.src=primeiro.image;a.alt='Joia '+primeiro.name;}
+      if(b&&segundo){b.src=segundo.image;b.alt='Joia '+segundo.name;}
+      fotosPreenchidas=true;
+    }
+    function atualizarContagens(){
+      const lista=obterProdutos();
+      if(!lista.length||!filtros) return;
+      filtros.querySelectorAll('button[data-filter]').forEach(botao=>{
+        if(botao.querySelector('.premium-filter-count')) return;
+        const nome=botao.dataset.filter;
+        const qtd=nome==='Todos'?lista.length:nome==='Novidades'?lista.filter(p=>p.featured).length:nome==='Argolas'?lista.filter(p=>p.category==='Argolas'||(p.category==='Brincos'&&normalizar(p.name).includes('argol'))).length:lista.filter(p=>p.category===nome).length;
+        const numero=document.createElement('span');
+        numero.className='premium-filter-count';
+        numero.textContent=qtd.toLocaleString('pt-BR');
+        botao.appendChild(numero);
+      });
+    }
+    function aplicarVitrine(){
+      if(!grade) return;
+      escolherFotos();atualizarContagens();
+      const itens=[...grade.querySelectorAll('.product-card')];
+      const pesquisa=normalizar(busca?.value.trim());
+      const encontrados=itens.filter(el=>!pesquisa||normalizar(el.textContent).includes(pesquisa));
+      const selecionado=filtros?.querySelector('.filter.active')?.dataset.filter || 'Todos';
+      if(titulo) titulo.textContent=selecionado==='Todos'?'Todos os modelos':selecionado==='Novidades'?'Novidades da coleção':'Joias · '+selecionado;
+      itens.forEach(el=>el.classList.add('premium-hidden'));
+      encontrados.slice(0,quantidadeVisivel).forEach(el=>el.classList.remove('premium-hidden'));
+      if(contador) contador.textContent=`${Math.min(encontrados.length,quantidadeVisivel).toLocaleString('pt-BR')} de ${encontrados.length.toLocaleString('pt-BR')} ${encontrados.length===1?'joia':'joias'}`;
+      if(mais){mais.hidden=encontrados.length<=quantidadeVisivel;mais.textContent=`Ver mais joias (${Math.min(24,encontrados.length-quantidadeVisivel)} próximas)`;}
+    }
+    function agendar(){if(debounce) return;debounce=true;requestAnimationFrame(()=>{debounce=false;aplicarVitrine();});}
+    if(grade) new MutationObserver(()=>{quantidadeVisivel=24;agendar();}).observe(grade,{childList:true});
+    if(filtros) new MutationObserver(agendar).observe(filtros,{childList:true});
+    if(busca) busca.addEventListener('input',()=>{quantidadeVisivel=24;if(busca.value.trim()){
+      const todos=filtros?.querySelector('[data-filter="Todos"]');
+      if(todos&&!todos.classList.contains('active')) todos.click();
+    }agendar();});
+    if(mais) mais.addEventListener('click',()=>{quantidadeVisivel+=24;agendar();});
+    document.getElementById('showAll')?.addEventListener('click',()=>{quantidadeVisivel=24;agendar();});
+    aplicarVitrine();
+  })();
+  </script>
+</body>
+</html>
