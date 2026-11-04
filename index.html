@@ -81,43 +81,33 @@
       .hero-copy{max-width:320px!important;}
     }
   </style>
-  <!-- ÚNICA MUDANÇA FUNCIONAL: filtros de categorias rolam na horizontal em telas pequenas. -->
+  <!-- Ajuste isolado: categorias em uma linha, com rolagem horizontal. -->
   <style id="myranda-mobile-categorias-deslizantes">
+    body.premium-boutique #filterRow {
+      display: flex !important;
+      flex-flow: row nowrap !important;
+      grid-template-columns: none !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      gap: 14px !important;
+      padding-bottom: 10px !important;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+    }
+    body.premium-boutique #filterRow > .filter {
+      box-sizing: border-box;
+      flex: 0 0 206px !important;
+      min-width: 0 !important;
+      white-space: nowrap !important;
+      scroll-snap-align: start;
+    }
     @media (max-width: 767px) {
-      body.premium-boutique #filterRow {
-        display: flex !important;
-        flex-flow: row nowrap !important;
-        grid-template-columns: none !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 0 !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        gap: 9px !important;
-        margin: 0 0 24px !important;
-        padding: 2px 1px 10px !important;
-        scroll-snap-type: x proximity;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        touch-action: pan-x pan-y;
-      }
-      body.premium-boutique #filterRow::-webkit-scrollbar { display: none; }
-      body.premium-boutique #filterRow .filter {
-        display: inline-flex !important;
-        flex: 0 0 auto !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: auto !important;
-        min-width: max-content !important;
-        min-height: 44px !important;
-        margin: 0 !important;
-        padding: 10px 14px !important;
-        gap: 11px !important;
-        white-space: nowrap !important;
-        scroll-snap-align: start;
-      }
-      body.premium-boutique .section.premium-catalog { min-width: 0 !important; }
+      body.premium-boutique #filterRow { gap: 9px !important; }
+      body.premium-boutique #filterRow > .filter { flex-basis: 170px !important; }
     }
   </style>
   <link rel="icon" href="/favicon.ico" sizes="any">
